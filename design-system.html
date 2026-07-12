@@ -1,4 +1,4 @@
-<!-- ALEXANDRA FIT - GLOBAL DESIGN SYSTEM & COMPONENT LIBRARY -->
+<!-- ALEXANDRA FIT - PREMIUM DARK BLOTATO-STYLE DESIGN SYSTEM -->
 <!-- Pure HTML5 + Tailwind CSS (CDN) - Zero Build Step -->
 
 <!DOCTYPE html>
@@ -6,9 +6,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Design System - Alexandra Fit</title>
+    <title>Premium Dark Design System - Alexandra Fit</title>
     
-    <!-- Tailwind CSS CDN -->
+    <!-- Tailwind CSS CDN with Dark Mode Support -->
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- Google Fonts: Poppins (700, 800) & Inter (400, 500) -->
@@ -16,32 +16,35 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@700;800&display=swap" rel="stylesheet">
     
-    <!-- Global Style Block with Design Tokens & Dark Mode -->
+    <!-- Global Style Block with Premium Dark Design System -->
     <style>
         /* ======================================
-           DESIGN TOKENS - STRICT ADHERENCE
+           DESIGN TOKENS - PREMIUM DARK THEME
            ====================================== */
         :root {
             /* Color Palette */
-            --color-primary: #FF6B6B;        /* Coral */
-            --color-secondary: #4ECDC4;      /* Turquoise */
-            --color-accent: #FFE66D;         /* Gold */
+            --color-primary: #FF6B6B;        /* Coral - Vibrant */
+            --color-secondary: #4ECDC4;      /* Turquoise - Vibrant */
+            --color-accent: #FFE66D;         /* Gold - Warm Vibrant */
+            
+            /* Dark Mode (Default) */
+            --color-dark-bg: #0F172A;        /* Deep Navy - Premium */
+            --color-dark-surface: #111827;   /* Charcoal Surface */
+            --color-dark-text: #F1F5F9;      /* Light Text */
+            --color-dark-muted: #94A3B8;     /* Muted Text */
             
             /* Light Mode */
-            --color-light-bg: #F7FAFC;
-            --color-light-text: #1A202C;
+            --color-light-bg: #F8FAFC;
+            --color-light-text: #0F172A;
             
-            /* Dark Mode */
-            --color-dark-bg: #1A202C;
-            --color-dark-text: #F7FAFC;
-            
-            /* Shadows */
+            /* Shadows & Effects */
             --shadow-subtle: 0 4px 6px rgba(0, 0, 0, 0.07);
-            --shadow-card: 0 10px 15px rgba(0, 0, 0, 0.08);
+            --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.3);
+            --shadow-glow: 0 0 20px rgba(255, 107, 107, 0.2);
             
             /* Border Radius */
-            --radius-card: 12px;
-            --radius-button: 8px;
+            --radius-card: 16px;
+            --radius-button: 10px;
             
             /* Typography */
             --font-heading: 'Poppins', sans-serif;
@@ -83,42 +86,36 @@
         }
         
         /* ======================================
-           LIGHT MODE (Default)
+           DARK MODE (DEFAULT)
            ====================================== */
+        html {
+            background-color: var(--color-dark-bg);
+            color: var(--color-dark-text);
+        }
+        
         body {
-            background-color: var(--color-light-bg);
-            color: var(--color-light-text);
-            transition: background-color 0.3s ease, color 0.3s ease;
+            background-color: var(--color-dark-bg);
+            color: var(--color-dark-text);
+            transition: background-color 0.3s ease;
         }
         
         /* ======================================
-           DARK MODE TOGGLE
+           GRADIENT TEXT EFFECTS
            ====================================== */
-        html.dark {
-            background-color: var(--color-dark-bg);
-            color: var(--color-dark-text);
-        }
-        
-        html.dark body {
-            background-color: var(--color-dark-bg);
-            color: var(--color-dark-text);
-        }
-        
-        html.dark .bg-light {
-            background-color: #2D3748;
-        }
-        
-        html.dark .text-dark {
-            color: var(--color-dark-text);
+        .gradient-text {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         /* ======================================
-           SECTION HEADER UNDERLINE ANIMATION
+           SECTION HEADER WITH GLOW
            ====================================== */
         .section-header-underline {
             position: relative;
             display: inline-block;
-            padding-bottom: 8px;
+            padding-bottom: 12px;
         }
         
         .section-header-underline::after {
@@ -130,6 +127,8 @@
             height: 3px;
             background: linear-gradient(90deg, var(--color-secondary), var(--color-accent));
             transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border-radius: 2px;
+            box-shadow: 0 0 12px rgba(78, 205, 196, 0.3);
         }
         
         .section-header-underline.animate::after {
@@ -137,50 +136,68 @@
         }
         
         /* ======================================
-           CARD 3D HOVER EFFECT
+           CARD 3D GLASSMORPHISM
            ====================================== */
         .card-3d {
-            background: white;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(8px);
             border-radius: var(--radius-card);
-            box-shadow: var(--shadow-subtle);
-            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
-                        box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
             will-change: transform;
         }
         
-        html.dark .card-3d {
-            background: #2D3748;
-            color: var(--color-dark-text);
-        }
-        
         .card-3d:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-card);
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4),
+                        0 0 20px rgba(255, 107, 107, 0.1);
         }
         
         /* ======================================
-           BUTTON STYLES
+           BUTTON STYLES - SLEEK & GLOWING
            ====================================== */
         .btn-primary {
             background: linear-gradient(135deg, var(--color-primary), #FF8A8A);
             color: white;
-            padding: 12px 24px;
+            padding: 12px 28px;
             border-radius: var(--radius-button);
-            font-weight: 500;
-            border: none;
+            font-weight: 600;
+            border: 1px solid rgba(255, 107, 107, 0.3);
             cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            box-shadow: var(--shadow-subtle);
+            transition: all 0.3s ease;
             font-family: var(--font-body);
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(255, 107, 107, 0.3);
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
         }
         
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(255, 107, 107, 0.3);
+            box-shadow: 0 0 30px rgba(255, 107, 107, 0.5),
+                        0 8px 16px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 107, 107, 0.5);
+        }
+        
+        .btn-primary:hover::before {
+            left: 100%;
         }
         
         .btn-primary:active {
@@ -188,40 +205,33 @@
         }
         
         .btn-secondary {
-            background: transparent;
-            color: var(--color-primary);
-            border: 2px solid var(--color-primary);
-            padding: 10px 22px;
+            background: rgba(78, 205, 196, 0.1);
+            color: var(--color-secondary);
+            border: 2px solid var(--color-secondary);
+            padding: 10px 24px;
             border-radius: var(--radius-button);
-            font-weight: 500;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
             font-family: var(--font-body);
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
+            backdrop-filter: blur(4px);
         }
         
         .btn-secondary:hover {
-            background: var(--color-primary);
-            color: white;
-            transform: translateY(-2px);
-        }
-        
-        html.dark .btn-secondary {
+            background: rgba(78, 205, 196, 0.2);
             color: var(--color-secondary);
-            border-color: var(--color-secondary);
-        }
-        
-        html.dark .btn-secondary:hover {
-            background: var(--color-secondary);
-            color: var(--color-dark-bg);
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(78, 205, 196, 0.3);
+            border-color: rgba(78, 205, 196, 0.8);
         }
         
         .btn-ghost {
             background: transparent;
-            color: var(--color-light-text);
+            color: var(--color-dark-text);
             border: none;
             padding: 8px 16px;
             border-radius: var(--radius-button);
@@ -231,23 +241,19 @@
             font-family: var(--font-body);
         }
         
-        html.dark .btn-ghost {
-            color: var(--color-dark-text);
-        }
-        
         .btn-ghost:hover {
             background: rgba(78, 205, 196, 0.1);
             color: var(--color-secondary);
         }
         
         /* ======================================
-           WHATSAPP MODAL STYLES
+           WHATSAPP MODAL STYLES - DARK GLASSMORPHISM
            ====================================== */
         #whatsapp-modal {
             display: none;
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(4px);
             z-index: 9998;
             animation: fadeIn 0.3s ease;
@@ -258,19 +264,43 @@
         }
         
         .whatsapp-modal-content {
-            background: white;
-            border-radius: 12px;
+            background: rgba(17, 24, 39, 0.95);
+            backdrop-filter: blur(12px);
+            border-radius: var(--radius-card);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             max-width: 500px;
             width: 90%;
             max-height: 85vh;
             overflow-y: auto;
-            box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5),
+                        0 0 40px rgba(255, 107, 107, 0.1);
             animation: slideUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
         
-        html.dark .whatsapp-modal-content {
-            background: #2D3748;
+        .whatsapp-modal-content h3 {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .whatsapp-modal-content label {
             color: var(--color-dark-text);
+            font-weight: 500;
+        }
+        
+        .whatsapp-modal-content input[type="radio"],
+        .whatsapp-modal-content select {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--color-dark-text);
+            accent-color: var(--color-primary);
+        }
+        
+        .whatsapp-modal-content select {
+            padding: 10px 12px;
+            border-radius: 8px;
+            backdrop-filter: blur(4px);
         }
         
         #whatsapp-trigger {
@@ -280,11 +310,12 @@
             width: 56px;
             height: 56px;
             border-radius: 50%;
-            background: #25D366;
+            background: linear-gradient(135deg, var(--color-primary), #FF8A8A);
             color: white;
-            border: none;
+            border: 1px solid rgba(255, 255, 255, 0.2);
             cursor: pointer;
-            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+            box-shadow: 0 0 20px rgba(255, 107, 107, 0.4),
+                        0 8px 20px rgba(0, 0, 0, 0.3);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -294,8 +325,9 @@
         }
         
         #whatsapp-trigger:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 16px rgba(37, 211, 102, 0.6);
+            transform: scale(1.15);
+            box-shadow: 0 0 30px rgba(255, 107, 107, 0.6),
+                        0 12px 24px rgba(0, 0, 0, 0.4);
         }
         
         #whatsapp-trigger:active {
@@ -316,7 +348,7 @@
         
         @keyframes slideUp {
             from {
-                transform: translateY(20px);
+                transform: translateY(30px);
                 opacity: 0;
             }
             to {
@@ -331,7 +363,7 @@
                 opacity: 1;
             }
             to {
-                transform: translateY(20px);
+                transform: translateY(30px);
                 opacity: 0;
             }
         }
@@ -339,105 +371,364 @@
         .modal-exit .whatsapp-modal-content {
             animation: slideOut 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
+        
+        /* ======================================
+           UTILITY CLASSES
+           ====================================== */
+        .smooth-scroll { scroll-behavior: smooth; }
+        
+        .glow-primary {
+            box-shadow: 0 0 20px rgba(255, 107, 107, 0.3);
+        }
+        
+        .glow-secondary {
+            box-shadow: 0 0 20px rgba(78, 205, 196, 0.3);
+        }
+        
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 107, 107, 0.5);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 107, 107, 0.7);
+        }
     </style>
 </head>
-<body>
-    <!-- EXAMPLE PAGE WITH ALL COMPONENTS -->
-    
-    <!-- Dark Mode Toggle (Top Right) -->
-    <nav class="flex justify-between items-center p-6 border-b border-gray-200 dark:border-gray-700">
-        <h1 class="text-2xl font-bold text-primary">Alexandra Fit</h1>
-        <button id="dark-mode-toggle" class="btn-ghost">
-            <span class="light-icon">🌙</span>
-            <span class="dark-icon" style="display: none;">☀️</span>
-        </button>
-    </nav>
-    
-    <main class="max-w-6xl mx-auto px-6 py-12">
-        
-        <!-- ===== BUTTON COMPONENT EXAMPLES ===== -->
-        <section class="mb-16">
-            <h2 class="text-3xl mb-8">Buttons</h2>
+<body class="smooth-scroll">
+
+    <!-- Navigation -->
+    <nav class="bg-black/30 backdrop-blur-md border-b border-white/10 sticky top-0 z-50">
+        <div class="flex justify-between items-center max-w-6xl mx-auto px-6 py-5">
+            <div class="flex items-center gap-3 text-2xl font-bold gradient-text">
+                💪 Alexandra Fit
+            </div>
             
-            <div class="space-y-4">
-                <div class="flex flex-wrap gap-4">
-                    <button class="btn-primary">
-                        ✓ Primary Button
-                    </button>
-                    <button class="btn-secondary">
-                        Secondary Button
-                    </button>
-                    <button class="btn-ghost">
-                        Ghost Button
-                    </button>
+            <button id="dark-mode-toggle" class="btn-ghost" style="padding: 6px 14px; font-size: 1.1rem;">
+                <span class="light-icon">🌙</span>
+                <span class="dark-icon" style="display: none;">☀️</span>
+            </button>
+        </div>
+    </nav>
+
+    <main class="max-w-6xl mx-auto px-6 py-16">
+        
+        <!-- Hero Section -->
+        <section class="mb-24">
+            <h1 class="gradient-text text-center mb-8">Premium Dark Design System</h1>
+            <p class="text-center text-gray-300 text-lg max-w-2xl mx-auto mb-8">
+                Blotato-inspired aesthetics with glassmorphism, vibrant gradients, and elegant interactions.
+            </p>
+            <div class="flex gap-4 justify-center flex-wrap">
+                <button class="btn-primary">
+                    ✨ Explore Components
+                </button>
+                <button class="btn-secondary">
+                    📖 View Docs
+                </button>
+            </div>
+        </section>
+
+        <!-- ===== BUTTON COMPONENT EXAMPLES ===== -->
+        <section class="mb-24">
+            <h2 class="text-3xl mb-12 text-center">
+                <span class="section-header-underline gradient-text" data-animate="true">Button Components</span>
+            </h2>
+            
+            <div class="card-3d p-8">
+                <div class="space-y-6">
+                    <div>
+                        <p class="text-gray-400 text-sm uppercase tracking-wider mb-4">Primary Buttons (with Glow)</p>
+                        <div class="flex flex-wrap gap-4">
+                            <button class="btn-primary">
+                                ✓ Primary Button
+                            </button>
+                            <button class="btn-primary">
+                                🚀 With Icon
+                            </button>
+                            <button class="btn-primary">
+                                💬 Send Message
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="border-t border-white/10 pt-6">
+                        <p class="text-gray-400 text-sm uppercase tracking-wider mb-4">Secondary Buttons (Glassmorphism)</p>
+                        <div class="flex flex-wrap gap-4">
+                            <button class="btn-secondary">
+                                Secondary Button
+                            </button>
+                            <button class="btn-secondary">
+                                🔗 Link Button
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="border-t border-white/10 pt-6">
+                        <p class="text-gray-400 text-sm uppercase tracking-wider mb-4">Ghost Buttons (Minimal)</p>
+                        <div class="flex flex-wrap gap-4">
+                            <button class="btn-ghost">
+                                Ghost Button
+                            </button>
+                            <button class="btn-ghost">
+                                📱 Minimal CTA
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
-        
-        <!-- ===== SECTION HEADER COMPONENT EXAMPLE ===== -->
-        <section class="mb-16">
-            <h2 class="section-header-underline text-3xl mb-8" data-animate="true">
-                Featured Services
+
+        <!-- ===== SECTION HEADER EXAMPLES ===== -->
+        <section class="mb-24">
+            <h2 class="text-3xl mb-12 text-center">
+                <span class="section-header-underline gradient-text" data-animate="true">Section Headers</span>
             </h2>
-            <p class="text-gray-600 dark:text-gray-400 mb-8">
-                Scroll to see the underline animation on the heading above.
-            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="card-3d p-8">
+                    <h3 class="section-header-underline gradient-text text-2xl mb-4" data-animate="true">
+                        Featured Section
+                    </h3>
+                    <p class="text-gray-300">
+                        Notice the elegant glowing underline that animates on scroll. Combines Turquoise and Gold gradients for a premium feel.
+                    </p>
+                </div>
+
+                <div class="card-3d p-8">
+                    <h3 class="section-header-underline gradient-text text-2xl mb-4" data-animate="true">
+                        Another Title
+                    </h3>
+                    <p class="text-gray-300">
+                        The underline has a subtle glow effect and smooth animation. Perfect for drawing attention to key sections.
+                    </p>
+                </div>
+            </div>
         </section>
-        
-        <!-- ===== CARD 3D COMPONENT EXAMPLES ===== -->
-        <section class="mb-16">
-            <h2 class="text-3xl mb-8">Cards (3D Hover Effect)</h2>
+
+        <!-- ===== CARD 3D EXAMPLES ===== -->
+        <section class="mb-24">
+            <h2 class="text-3xl mb-12 text-center">
+                <span class="section-header-underline gradient-text" data-animate="true">Card 3D Components</span>
+            </h2>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <!-- Card 1 -->
-                <div class="card-3d p-6">
-                    <div class="w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-lg mb-4"></div>
-                    <h3 class="text-xl font-bold mb-3">Personal Training</h3>
-                    <p class="text-gray-600 dark:text-gray-400 mb-4">
-                        One-on-one sessions tailored to your fitness goals.
+                <div class="card-3d p-8">
+                    <div class="w-14 h-14 rounded-lg bg-gradient-to-br from-red-500 to-pink-500 mb-6 flex items-center justify-center text-2xl">
+                        💪
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 gradient-text">Personal Training</h3>
+                    <p class="text-gray-300 mb-6">
+                        One-on-one expert coaching tailored to your fitness goals and lifestyle.
                     </p>
-                    <button class="btn-primary text-sm">Learn More</button>
+                    <button class="btn-primary w-full justify-center text-sm">
+                        Learn More
+                    </button>
                 </div>
-                
+
                 <!-- Card 2 -->
-                <div class="card-3d p-6">
-                    <div class="w-12 h-12 bg-gradient-to-br from-secondary to-accent rounded-lg mb-4"></div>
-                    <h3 class="text-xl font-bold mb-3">Group Classes</h3>
-                    <p class="text-gray-600 dark:text-gray-400 mb-4">
-                        Join our energizing group fitness sessions.
+                <div class="card-3d p-8">
+                    <div class="w-14 h-14 rounded-lg bg-gradient-to-br from-cyan-500 to-teal-500 mb-6 flex items-center justify-center text-2xl">
+                        📱
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 gradient-text">Online Coaching</h3>
+                    <p class="text-gray-300 mb-6">
+                        Train from anywhere with real-time guidance and professional form correction.
                     </p>
-                    <button class="btn-primary text-sm">Learn More</button>
+                    <button class="btn-primary w-full justify-center text-sm">
+                        Learn More
+                    </button>
                 </div>
-                
+
                 <!-- Card 3 -->
-                <div class="card-3d p-6">
-                    <div class="w-12 h-12 bg-gradient-to-br from-accent to-primary rounded-lg mb-4"></div>
-                    <h3 class="text-xl font-bold mb-3">Nutrition Plan</h3>
-                    <p class="text-gray-600 dark:text-gray-400 mb-4">
-                        Custom meal plans to complement your fitness journey.
+                <div class="card-3d p-8">
+                    <div class="w-14 h-14 rounded-lg bg-gradient-to-br from-yellow-500 to-orange-500 mb-6 flex items-center justify-center text-2xl">
+                        🥗
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 gradient-text">Nutrition Plans</h3>
+                    <p class="text-gray-300 mb-6">
+                        Custom meal plans designed to fuel your workouts and deliver results.
                     </p>
-                    <button class="btn-primary text-sm">Learn More</button>
+                    <button class="btn-primary w-full justify-center text-sm">
+                        Learn More
+                    </button>
+                </div>
+            </div>
+
+            <!-- Feature Highlight Card -->
+            <div class="card-3d p-8 mt-8 glow-secondary">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4 gradient-text">Why Choose Us?</h3>
+                        <ul class="space-y-3">
+                            <li class="flex gap-3 items-start">
+                                <span class="text-secondary">✓</span>
+                                <span class="text-gray-300">5+ years of expert experience</span>
+                            </li>
+                            <li class="flex gap-3 items-start">
+                                <span class="text-secondary">✓</span>
+                                <span class="text-gray-300">200+ satisfied clients</span>
+                            </li>
+                            <li class="flex gap-3 items-start">
+                                <span class="text-secondary">✓</span>
+                                <span class="text-gray-300">Science-backed methods</span>
+                            </li>
+                            <li class="flex gap-3 items-start">
+                                <span class="text-secondary">✓</span>
+                                <span class="text-gray-300">Personalized approach</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="bg-gradient-to-br from-primary/20 to-secondary/20 backdrop-blur-md rounded-xl p-6 border border-white/10">
+                        <p class="text-gray-300 text-center">
+                            "Transform your body and mind with expert guidance and personalized attention."
+                        </p>
+                    </div>
                 </div>
             </div>
         </section>
-        
-        <!-- ===== WHATSAPP MODAL TRIGGER ===== -->
-        <section class="mb-16 p-8 bg-gradient-to-r from-primary to-secondary rounded-xl text-white">
-            <h2 class="text-2xl font-bold mb-4">Get Started Today</h2>
-            <p class="mb-6">Click the WhatsApp button in the bottom-right corner to start your fitness journey!</p>
-            <button class="btn-primary bg-white text-primary hover:bg-gray-100">
-                Open WhatsApp Form
-            </button>
+
+        <!-- ===== WHATSAPP MODAL DEMO ===== -->
+        <section class="mb-24">
+            <h2 class="text-3xl mb-12 text-center">
+                <span class="section-header-underline gradient-text" data-animate="true">WhatsApp Modal</span>
+            </h2>
+            
+            <div class="card-3d p-8">
+                <div class="text-center">
+                    <p class="text-gray-300 mb-6">
+                        Click the button below to open the dark-themed 4-question qualification modal.
+                    </p>
+                    <button class="btn-primary" onclick="openWhatsAppModal()">
+                        💬 Open Qualification Form
+                    </button>
+                </div>
+            </div>
         </section>
+
+        <!-- ===== DESIGN TOKENS REFERENCE ===== -->
+        <section class="mb-24">
+            <h2 class="text-3xl mb-12 text-center">
+                <span class="section-header-underline gradient-text" data-animate="true">Design Tokens</span>
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Colors -->
+                <div class="card-3d p-8">
+                    <h3 class="text-xl font-bold mb-6 gradient-text">Colors</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-lg bg-red-500 shadow-lg"></div>
+                            <div>
+                                <p class="font-semibold">Primary (Coral)</p>
+                                <p class="text-gray-400 text-sm">#FF6B6B</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-lg bg-cyan-500 shadow-lg"></div>
+                            <div>
+                                <p class="font-semibold">Secondary (Turquoise)</p>
+                                <p class="text-gray-400 text-sm">#4ECDC4</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-lg bg-yellow-400 shadow-lg"></div>
+                            <div>
+                                <p class="font-semibold">Accent (Gold)</p>
+                                <p class="text-gray-400 text-sm">#FFE66D</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-lg bg-slate-900/50 border border-white/10 shadow-lg"></div>
+                            <div>
+                                <p class="font-semibold">Dark BG</p>
+                                <p class="text-gray-400 text-sm">#0F172A</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Typography & Effects -->
+                <div class="card-3d p-8">
+                    <h3 class="text-xl font-bold mb-6 gradient-text">Effects & Features</h3>
+                    <ul class="space-y-4 text-gray-300">
+                        <li class="flex gap-3 items-start">
+                            <span class="text-secondary font-bold">•</span>
+                            <span><strong>Glassmorphism:</strong> Translucent backgrounds with backdrop blur</span>
+                        </li>
+                        <li class="flex gap-3 items-start">
+                            <span class="text-secondary font-bold">•</span>
+                            <span><strong>Glow Effects:</strong> Subtle glowing shadows on buttons & cards</span>
+                        </li>
+                        <li class="flex gap-3 items-start">
+                            <span class="text-secondary font-bold">•</span>
+                            <span><strong>Gradient Text:</strong> Coral to Turquoise on headings</span>
+                        </li>
+                        <li class="flex gap-3 items-start">
+                            <span class="text-secondary font-bold">•</span>
+                            <span><strong>Elegant Borders:</strong> Subtle white/10 for depth</span>
+                        </li>
+                        <li class="flex gap-3 items-start">
+                            <span class="text-secondary font-bold">•</span>
+                            <span><strong>Smooth Animations:</strong> Cubic-bezier easing for premium feel</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== QUICK START ===== -->
+        <section>
+            <div class="card-3d p-8 glow-primary">
+                <h2 class="text-2xl font-bold mb-6 gradient-text">Quick Start Guide</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div>
+                        <h4 class="font-semibold text-lg mb-3 flex items-center gap-2">
+                            <span class="text-primary">1.</span> Import CSS
+                        </h4>
+                        <p class="text-gray-300 text-sm">
+                            Copy the global style block from this design system to your pages.
+                        </p>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-lg mb-3 flex items-center gap-2">
+                            <span class="text-primary">2.</span> Use Components
+                        </h4>
+                        <p class="text-gray-300 text-sm">
+                            Apply the card-3d, btn-primary, and section-header-underline classes to your HTML.
+                        </p>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-lg mb-3 flex items-center gap-2">
+                            <span class="text-primary">3.</span> Deploy
+                        </h4>
+                        <p class="text-gray-300 text-sm">
+                            No build step needed! Just HTML, Tailwind CDN, and this CSS file.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
-    
-    <!-- ===== WHATSAPP MODAL ===== -->
+
+    <!-- WhatsApp Modal -->
     <div id="whatsapp-modal">
         <div class="whatsapp-modal-content p-8">
             <!-- Close Button -->
-            <div class="flex justify-between items-center mb-6">
-                <h3 class="text-2xl font-bold">Let's Get You Started</h3>
-                <button id="whatsapp-close" class="text-2xl leading-none">&times;</button>
+            <div class="flex justify-between items-center mb-8">
+                <h3 class="text-2xl font-bold">Let's Get Started</h3>
+                <button id="whatsapp-close" class="text-2xl leading-none" style="background: none; border: none; cursor: pointer; padding: 0; color: var(--color-dark-text);">&times;</button>
             </div>
             
             <!-- Qualification Form -->
@@ -445,50 +736,50 @@
                 
                 <!-- Goal -->
                 <div>
-                    <label class="block font-semibold mb-3">What's Your Fitness Goal?</label>
-                    <div class="space-y-2">
-                        <label class="flex items-center">
-                            <input type="radio" name="goal" value="Weight Loss" class="mr-3" required>
+                    <label class="block font-semibold mb-4 text-lg">What's Your Fitness Goal?</label>
+                    <div class="space-y-3">
+                        <label class="flex items-center cursor-pointer hover:bg-white/5 p-3 rounded-lg transition">
+                            <input type="radio" name="goal" value="Weight Loss" class="w-4 h-4 mr-4" required>
                             <span>Weight Loss</span>
                         </label>
-                        <label class="flex items-center">
-                            <input type="radio" name="goal" value="Muscle Gain" class="mr-3">
+                        <label class="flex items-center cursor-pointer hover:bg-white/5 p-3 rounded-lg transition">
+                            <input type="radio" name="goal" value="Muscle Gain" class="w-4 h-4 mr-4">
                             <span>Muscle Gain</span>
                         </label>
-                        <label class="flex items-center">
-                            <input type="radio" name="goal" value="General Fitness" class="mr-3">
+                        <label class="flex items-center cursor-pointer hover:bg-white/5 p-3 rounded-lg transition">
+                            <input type="radio" name="goal" value="General Fitness" class="w-4 h-4 mr-4">
                             <span>General Fitness</span>
                         </label>
-                        <label class="flex items-center">
-                            <input type="radio" name="goal" value="Athletic Performance" class="mr-3">
+                        <label class="flex items-center cursor-pointer hover:bg-white/5 p-3 rounded-lg transition">
+                            <input type="radio" name="goal" value="Athletic Performance" class="w-4 h-4 mr-4">
                             <span>Athletic Performance</span>
                         </label>
                     </div>
                 </div>
                 
                 <!-- Level -->
-                <div>
-                    <label class="block font-semibold mb-3">What's Your Fitness Level?</label>
-                    <div class="space-y-2">
-                        <label class="flex items-center">
-                            <input type="radio" name="level" value="Beginner" class="mr-3" required>
+                <div class="border-t border-white/10 pt-6">
+                    <label class="block font-semibold mb-4 text-lg">What's Your Fitness Level?</label>
+                    <div class="space-y-3">
+                        <label class="flex items-center cursor-pointer hover:bg-white/5 p-3 rounded-lg transition">
+                            <input type="radio" name="level" value="Beginner" class="w-4 h-4 mr-4" required>
                             <span>Beginner</span>
                         </label>
-                        <label class="flex items-center">
-                            <input type="radio" name="level" value="Intermediate" class="mr-3">
+                        <label class="flex items-center cursor-pointer hover:bg-white/5 p-3 rounded-lg transition">
+                            <input type="radio" name="level" value="Intermediate" class="w-4 h-4 mr-4">
                             <span>Intermediate</span>
                         </label>
-                        <label class="flex items-center">
-                            <input type="radio" name="level" value="Advanced" class="mr-3">
+                        <label class="flex items-center cursor-pointer hover:bg-white/5 p-3 rounded-lg transition">
+                            <input type="radio" name="level" value="Advanced" class="w-4 h-4 mr-4">
                             <span>Advanced</span>
                         </label>
                     </div>
                 </div>
                 
                 <!-- Location -->
-                <div>
-                    <label class="block font-semibold mb-3">Where Are You Located?</label>
-                    <select name="location" class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white" required>
+                <div class="border-t border-white/10 pt-6">
+                    <label class="block font-semibold mb-4 text-lg">Where Are You Located?</label>
+                    <select name="location" class="w-full p-3 rounded-lg" required>
                         <option value="">Select location...</option>
                         <option value="London">London</option>
                         <option value="Manchester">Manchester</option>
@@ -499,58 +790,50 @@
                 </div>
                 
                 <!-- Timeline -->
-                <div>
-                    <label class="block font-semibold mb-3">When Can You Start?</label>
-                    <div class="space-y-2">
-                        <label class="flex items-center">
-                            <input type="radio" name="timeline" value="Immediately" class="mr-3" required>
+                <div class="border-t border-white/10 pt-6">
+                    <label class="block font-semibold mb-4 text-lg">When Can You Start?</label>
+                    <div class="space-y-3">
+                        <label class="flex items-center cursor-pointer hover:bg-white/5 p-3 rounded-lg transition">
+                            <input type="radio" name="timeline" value="Immediately" class="w-4 h-4 mr-4" required>
                             <span>Immediately</span>
                         </label>
-                        <label class="flex items-center">
-                            <input type="radio" name="timeline" value="This Week" class="mr-3">
+                        <label class="flex items-center cursor-pointer hover:bg-white/5 p-3 rounded-lg transition">
+                            <input type="radio" name="timeline" value="This Week" class="w-4 h-4 mr-4">
                             <span>This Week</span>
                         </label>
-                        <label class="flex items-center">
-                            <input type="radio" name="timeline" value="Next Month" class="mr-3">
+                        <label class="flex items-center cursor-pointer hover:bg-white/5 p-3 rounded-lg transition">
+                            <input type="radio" name="timeline" value="Next Month" class="w-4 h-4 mr-4">
                             <span>Next Month</span>
                         </label>
                     </div>
                 </div>
                 
                 <!-- Submit Button -->
-                <button type="submit" class="btn-primary w-full justify-center">
+                <button type="submit" class="btn-primary w-full justify-center mt-8">
                     Send to WhatsApp
                 </button>
             </form>
         </div>
     </div>
-    
+
     <!-- WhatsApp Trigger Button -->
     <button id="whatsapp-trigger" title="Chat with us on WhatsApp">
         💬
     </button>
-    
+
     <!-- ===== JAVASCRIPT ===== -->
     <script>
         // ===== DARK MODE TOGGLE =====
         const darkModeToggle = document.getElementById('dark-mode-toggle');
         const html = document.documentElement;
         
-        // Check for saved dark mode preference
-        if (localStorage.getItem('darkMode') === 'enabled') {
+        if (localStorage.getItem('darkMode') !== 'disabled') {
             html.classList.add('dark');
-            updateDarkModeIcon();
         }
         
         darkModeToggle.addEventListener('click', () => {
             html.classList.toggle('dark');
-            
-            if (html.classList.contains('dark')) {
-                localStorage.setItem('darkMode', 'enabled');
-            } else {
-                localStorage.setItem('darkMode', 'disabled');
-            }
-            
+            localStorage.setItem('darkMode', html.classList.contains('dark') ? 'enabled' : 'disabled');
             updateDarkModeIcon();
         });
         
@@ -566,7 +849,7 @@
                 darkIcon.style.display = 'none';
             }
         }
-        
+
         // ===== SECTION HEADER UNDERLINE ANIMATION =====
         const sectionHeaders = document.querySelectorAll('.section-header-underline[data-animate]');
         
@@ -583,19 +866,19 @@
         });
         
         sectionHeaders.forEach(header => observer.observe(header));
-        
+
         // ===== WHATSAPP MODAL FUNCTIONALITY =====
         const whatsappTrigger = document.getElementById('whatsapp-trigger');
         const whatsappModal = document.getElementById('whatsapp-modal');
         const whatsappClose = document.getElementById('whatsapp-close');
         const whatsappForm = document.getElementById('whatsapp-form');
         
-        // Open modal
-        whatsappTrigger.addEventListener('click', () => {
+        function openWhatsAppModal() {
             whatsappModal.classList.add('active');
-        });
+        }
         
-        // Close modal
+        whatsappTrigger.addEventListener('click', openWhatsAppModal);
+        
         const closeModal = () => {
             whatsappModal.classList.add('modal-exit');
             setTimeout(() => {
@@ -605,46 +888,37 @@
         
         whatsappClose.addEventListener('click', closeModal);
         
-        // Close on background click
         whatsappModal.addEventListener('click', (e) => {
             if (e.target === whatsappModal) {
                 closeModal();
             }
         });
         
-        // Form submission
         whatsappForm.addEventListener('submit', (e) => {
             e.preventDefault();
             
-            // Get form values
             const goal = document.querySelector('input[name="goal"]:checked')?.value || '';
             const level = document.querySelector('input[name="level"]:checked')?.value || '';
             const location = document.querySelector('select[name="location"]').value || '';
             const timeline = document.querySelector('input[name="timeline"]:checked')?.value || '';
             
-            // Build WhatsApp message
-            const message = `Hi! I'm interested in starting my fitness journey.\n\nGoal: ${goal}\nFitness Level: ${level}\nLocation: ${location}\nTimeline: ${timeline}\n\nLooking forward to hearing from you!`;
+            const message = `Hi! I'm interested in starting my fitness journey with Alexandra.\n\nGoal: ${goal}\nFitness Level: ${level}\nLocation: ${location}\nTimeline: ${timeline}\n\nLooking forward to hearing from you!`;
             
-            // Encode message for URL
             const encodedMessage = encodeURIComponent(message);
             const whatsappURL = `https://wa.me/447940053102?text=${encodedMessage}`;
             
-            // Open WhatsApp
             window.open(whatsappURL, '_blank');
             
-            // Close modal
             closeModal();
-            
-            // Reset form
             whatsappForm.reset();
         });
         
-        // Close modal on Escape key
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && whatsappModal.classList.contains('active')) {
                 closeModal();
             }
         });
     </script>
+
 </body>
 </html>
