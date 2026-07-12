@@ -220,6 +220,120 @@
             .nav-menu a { border: none; padding: 0; }
             
             .hamburger { display: none !important; }
+            
+            /* Dropdown Styles */
+            .dropdown {
+                position: relative;
+                display: inline-block;
+            }
+            
+            .dropdown-btn {
+                background: transparent;
+                color: var(--text-secondary);
+                border: none;
+                font-size: 1rem;
+                font-weight: 500;
+                cursor: pointer;
+                transition: color 0.2s ease;
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                font-family: var(--font-body);
+            }
+            
+            .dropdown-btn:hover {
+                color: var(--color-primary);
+            }
+            
+            .dropdown-content {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                background: rgba(15, 23, 42, 0.95);
+                backdrop-filter: blur(10px);
+                min-width: 180px;
+                box-shadow: var(--shadow-lg);
+                border-radius: var(--radius-sm);
+                border: 1px solid var(--border-color);
+                z-index: 1001;
+                padding: 10px 0;
+            }
+            
+            .dropdown:hover .dropdown-content {
+                display: block;
+            }
+            
+            .dropdown-content a {
+                display: block;
+                padding: 12px 20px;
+                color: var(--text-secondary);
+                text-decoration: none;
+                transition: all 0.2s ease;
+                border-bottom: 1px solid var(--border-color);
+            }
+            
+            .dropdown-content a:last-child {
+                border-bottom: none;
+            }
+            
+            .dropdown-content a:hover {
+                background: rgba(255, 107, 107, 0.1);
+                color: var(--color-primary);
+            }
+        }
+        
+        /* Mobile Dropdown Styles */
+        .dropdown {
+            width: 100%;
+        }
+        
+        .dropdown-btn {
+            background: transparent;
+            color: var(--text-secondary);
+            border: none;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: color 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-color);
+            font-family: var(--font-body);
+        }
+        
+        .dropdown-btn:hover {
+            color: var(--color-primary);
+        }
+        
+        .dropdown-content {
+            display: none;
+            background: rgba(15, 23, 42, 0.5);
+            padding-left: 20px;
+        }
+        
+        .dropdown-content.show {
+            display: block;
+        }
+        
+        .dropdown-content a {
+            display: block;
+            padding: 10px 0;
+            color: var(--text-tertiary);
+            text-decoration: none;
+            transition: color 0.2s ease;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .dropdown-content a:last-child {
+            border-bottom: none;
+        }
+        
+        .dropdown-content a:hover {
+            color: var(--color-primary);
         }
         
         /* ======================================
@@ -938,6 +1052,20 @@
                 <a href="#tools">Tools</a>
                 <a href="#exercises">Exercises</a>
                 <a href="#pricing">Pricing</a>
+                
+                <!-- Locations Dropdown -->
+                <div class="dropdown" id="locationsDropdown">
+                    <button class="dropdown-btn">Locations <i class="fas fa-chevron-down"></i></button>
+                    <div class="dropdown-content">
+                        <a href="locations/stratford.html">Stratford</a>
+                        <a href="locations/ilford.html">Ilford</a>
+                        <a href="locations/forestgate.html">Forest Gate</a>
+                        <a href="locations/uptonpark.html">Upton Park</a>
+                        <a href="locations/leyton.html">Leyton</a>
+                    </div>
+                </div>
+                
+                <a href="blog.html">Blog</a>
                 <a href="#about">About</a>
                 <a href="#contact">Contact</a>
             </div>
@@ -1310,8 +1438,18 @@
                 <a href="#tools">Tools</a>
                 <a href="#exercises">Exercises</a>
                 <a href="#pricing">Pricing</a>
+                <a href="blog.html">Blog</a>
                 <a href="#about">About</a>
                 <a href="#contact">Contact</a>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Training Locations</h4>
+                <a href="locations/stratford.html">Stratford</a>
+                <a href="locations/ilford.html">Ilford</a>
+                <a href="locations/forestgate.html">Forest Gate</a>
+                <a href="locations/uptonpark.html">Upton Park</a>
+                <a href="locations/leyton.html">Leyton</a>
             </div>
             
             <div class="footer-section">
@@ -1487,12 +1625,46 @@
             navMenu.classList.toggle('active');
         });
         
-        document.querySelectorAll('.nav-menu a').forEach(link => {
+        // Close mobile menu when clicking on links (but not dropdown buttons)
+        document.querySelectorAll('.nav-menu > a').forEach(link => {
             link.addEventListener('click', () => {
                 hamburger.classList.remove('active');
                 navMenu.classList.remove('active');
             });
         });
+        
+        // Mobile dropdown toggle functionality
+        const dropdownBtn = document.querySelector('.dropdown-btn');
+        const dropdownContent = document.querySelector('.dropdown-content');
+        
+        if (dropdownBtn && dropdownContent) {
+            dropdownBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                // Only toggle on mobile (when hamburger is visible)
+                if (window.innerWidth < 768) {
+                    dropdownContent.classList.toggle('show');
+                    const icon = dropdownBtn.querySelector('i');
+                    if (icon) {
+                        icon.classList.toggle('fa-chevron-down');
+                        icon.classList.toggle('fa-chevron-up');
+                    }
+                }
+            });
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.dropdown')) {
+                    dropdownContent.classList.remove('show');
+                    const icon = dropdownBtn.querySelector('i');
+                    if (icon) {
+                        icon.classList.add('fa-chevron-down');
+                        icon.classList.remove('fa-chevron-up');
+                    }
+                }
+            });
+        }
 
         // ===== EXERCISE DATA =====
         const exercises = [
