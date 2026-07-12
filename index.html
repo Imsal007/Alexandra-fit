@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,7 +25,7 @@
     <!-- Preload critical fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@700;800&display=swap" rel="stylesheet">
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -35,29 +35,40 @@
     
     <style>
         /* ======================================
-           DESIGN TOKENS - STRICT ADHERENCE
+           DESIGN TOKENS - PREMIUM DARK THEME
            ====================================== */
         :root {
             /* Color Palette */
-            --color-primary: #FF6B6B;        /* Coral */
-            --color-secondary: #4ECDC4;      /* Turquoise */
-            --color-accent: #FFE66D;         /* Gold */
+            --color-primary: #FF6B6B;
+            --color-primary-dark: #E55555;
+            --color-secondary: #4ECDC4;
+            --color-accent: #FFE66D;
+            
+            /* Dark Mode (Default) */
+            --bg-primary: #0F172A;
+            --bg-secondary: #1E293B;
+            --bg-tertiary: #334155;
+            --text-primary: #F8FAFC;
+            --text-secondary: #CBD5E1;
+            --text-tertiary: #94A3B8;
+            --border-color: rgba(255, 255, 255, 0.1);
             
             /* Light Mode */
-            --color-light-bg: #F7FAFC;
-            --color-light-text: #1A202C;
-            
-            /* Dark Mode */
-            --color-dark-bg: #1A202C;
-            --color-dark-text: #F7FAFC;
+            --light-bg-primary: #F8FAFC;
+            --light-bg-secondary: #FFFFFF;
+            --light-text-primary: #0F172A;
+            --light-text-secondary: #475569;
             
             /* Shadows */
-            --shadow-subtle: 0 4px 6px rgba(0, 0, 0, 0.07);
-            --shadow-card: 0 10px 15px rgba(0, 0, 0, 0.08);
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
+            --shadow-glow: 0 0 20px rgba(255, 107, 107, 0.3);
             
             /* Border Radius */
-            --radius-card: 12px;
-            --radius-button: 8px;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
             
             /* Typography */
             --font-heading: 'Poppins', sans-serif;
@@ -65,27 +76,43 @@
         }
         
         /* ======================================
-           BASE TYPOGRAPHY & RESET
+           BASE STYLES
            ====================================== */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
-        * {
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
             font-family: var(--font-body);
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: background 0.3s ease, color 0.3s ease;
+            min-height: 100vh;
+        }
+        
+        /* Light Mode */
+        html:not(.dark) body {
+            background: var(--light-bg-primary);
+            color: var(--light-text-primary);
         }
         
         h1, h2, h3, h4, h5, h6 {
             font-family: var(--font-heading);
             font-weight: 700;
+            line-height: 1.2;
         }
         
         h1 {
-            font-size: 2.5rem;
+            font-size: 3rem;
             font-weight: 800;
             letter-spacing: -0.02em;
         }
         
         h2 {
-            font-size: 2rem;
+            font-size: 2.5rem;
             font-weight: 800;
         }
         
@@ -94,245 +121,59 @@
             font-weight: 700;
         }
         
-        body {
-            font-size: 1rem;
-            font-weight: 400;
-            line-height: 1.6;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-        
         /* ======================================
-           LIGHT MODE (Default)
+           GLASSMORPHISM EFFECTS
            ====================================== */
-        body {
-            background-color: var(--color-light-bg);
-            color: var(--color-light-text);
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
-        /* ======================================
-           DARK MODE TOGGLE
-           ====================================== */
-        html.dark {
-            background-color: var(--color-dark-bg);
-            color: var(--color-dark-text);
-        }
-        
-        html.dark body {
-            background-color: var(--color-dark-bg);
-            color: var(--color-dark-text);
-        }
-        
-        html.dark .navbar {
-            background-color: #2D3748;
-            border-bottom-color: rgba(255, 255, 255, 0.1);
-        }
-        
-        html.dark .nav-menu {
-            background-color: #2D3748;
-            border-bottom-color: rgba(255, 255, 255, 0.1);
-        }
-        
-        html.dark .nav-menu a {
-            color: var(--color-dark-text);
-            border-bottom-color: rgba(255, 255, 255, 0.1);
-        }
-        
-        html.dark .section.bg-gray-50 {
-            background-color: #2D3748 !important;
-        }
-        
-        html.dark .card-3d {
-            background: #2D3748;
-            color: var(--color-dark-text);
-        }
-        
-        html.dark .card-3d:hover {
-            box-shadow: 0 20px 25px rgba(0, 0, 0, 0.5);
-        }
-        
-        html.dark .exercise-card {
-            background: #2D3748;
-            color: var(--color-dark-text);
-            border-color: rgba(255, 255, 255, 0.1);
-        }
-        
-        html.dark .pricing-card {
-            background: #2D3748;
-            color: var(--color-dark-text);
-        }
-        
-        html.dark .calculator-result {
-            background: #2D3748;
-            color: var(--color-dark-text);
-        }
-        
-        html.dark .form-group input,
-        html.dark .form-group select,
-        html.dark .form-group textarea {
-            background: #1A202C;
-            color: var(--color-dark-text);
-            border-color: rgba(255, 255, 255, 0.1);
-        }
-        
-        html.dark .filter-btn {
-            border-color: rgba(255, 255, 255, 0.1);
-            color: var(--color-dark-text);
-            background: transparent;
-        }
-        
-        html.dark .filter-btn.active {
-            background: var(--color-primary);
-            color: white;
-            border-color: var(--color-primary);
-        }
-        
-        html.dark .search-box input {
-            background: #1A202C;
-            color: var(--color-dark-text);
-            border-color: rgba(255, 255, 255, 0.1);
-        }
-        
-        html.dark .btn-secondary {
-            color: var(--color-secondary);
-            border-color: var(--color-secondary);
-        }
-        
-        html.dark .btn-secondary:hover {
-            background: var(--color-secondary);
-            color: var(--color-dark-bg);
-        }
-        
-        html.dark .btn-ghost {
-            color: var(--color-dark-text);
-        }
-        
-        html.dark .btn-ghost:hover {
-            background: rgba(78, 205, 196, 0.1);
-            color: var(--color-secondary);
-        }
-        
-        /* ======================================
-           SECTION HEADER UNDERLINE ANIMATION
-           ====================================== */
-        .section-header-underline {
-            position: relative;
-            display: inline-block;
-            padding-bottom: 12px;
-        }
-        
-        .section-header-underline::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--color-secondary), var(--color-accent));
-            transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-            border-radius: 2px;
-        }
-        
-        .section-header-underline.animate::after {
-            width: 100%;
-        }
-        
-        /* ======================================
-           CARD 3D HOVER EFFECT
-           ====================================== */
-        .card-3d {
-            background: white;
-            border-radius: var(--radius-card);
-            box-shadow: var(--shadow-subtle);
-            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
-                        box-shadow 0.3s ease;
-            will-change: transform;
-        }
-        
-        .card-3d:hover {
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.08);
             transform: translateY(-5px);
-            box-shadow: var(--shadow-card);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        html:not(.dark) .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        html:not(.dark) .glass-card:hover {
+            background: rgba(255, 255, 255, 1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
         
         /* ======================================
-           BUTTON STYLES
+           GRADIENT TEXT EFFECTS
            ====================================== */
-        .btn-primary {
-            background: linear-gradient(135deg, var(--color-primary), #FF8A8A);
-            color: white;
-            padding: 12px 24px;
-            border-radius: var(--radius-button);
-            font-weight: 500;
-            border: none;
-            cursor: pointer;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            box-shadow: var(--shadow-subtle);
-            font-family: var(--font-body);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            text-decoration: none;
-        }
-        
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(255, 107, 107, 0.3);
-        }
-        
-        .btn-primary:active {
-            transform: translateY(0);
-        }
-        
-        .btn-secondary {
-            background: transparent;
-            color: var(--color-primary);
-            border: 2px solid var(--color-primary);
-            padding: 10px 22px;
-            border-radius: var(--radius-button);
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-family: var(--font-body);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            text-decoration: none;
-        }
-        
-        .btn-secondary:hover {
-            background: var(--color-primary);
-            color: white;
-            transform: translateY(-2px);
-        }
-        
-        .btn-ghost {
-            background: transparent;
-            color: var(--color-light-text);
-            border: none;
-            padding: 8px 16px;
-            border-radius: var(--radius-button);
-            font-weight: 400;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-family: var(--font-body);
-        }
-        
-        .btn-ghost:hover {
-            background: rgba(78, 205, 196, 0.1);
-            color: var(--color-secondary);
+        .gradient-text {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         /* ======================================
            NAVBAR STYLES
            ====================================== */
         .navbar {
-            background: white;
-            box-shadow: var(--shadow-subtle);
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
             position: sticky;
             top: 0;
             z-index: 1000;
-            transition: background-color 0.3s ease;
+            transition: all 0.3s ease;
+        }
+        
+        html:not(.dark) .navbar {
+            background: rgba(255, 255, 255, 0.9);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
         }
         
         .nav-menu {
@@ -341,20 +182,24 @@
             top: 70px;
             left: 0;
             right: 0;
-            background: white;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
             flex-direction: column;
             padding: 20px;
-            box-shadow: var(--shadow-subtle);
-            transition: background-color 0.3s ease;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        html:not(.dark) .nav-menu {
+            background: rgba(255, 255, 255, 0.98);
         }
         
         .nav-menu.active { display: flex; }
         
         .nav-menu a {
             padding: 12px 0;
-            color: var(--color-light-text);
+            color: var(--text-secondary);
             text-decoration: none;
-            border-bottom: 1px solid #e2e8f0;
+            border-bottom: 1px solid var(--border-color);
             font-weight: 500;
             transition: color 0.2s ease;
         }
@@ -375,7 +220,7 @@
         .hamburger span {
             width: 25px;
             height: 3px;
-            background: var(--color-light-text);
+            background: var(--text-primary);
             border-radius: 2px;
             transition: all 0.3s ease;
         }
@@ -398,9 +243,10 @@
                 position: static;
                 flex-direction: row;
                 gap: 30px;
-                box-shadow: none;
                 padding: 0;
                 top: auto;
+                background: transparent;
+                border: none;
             }
             
             .nav-menu a { border: none; padding: 0; }
@@ -412,273 +258,219 @@
            HERO SECTION
            ====================================== */
         .hero {
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1518611505868-d2b4fd09b592?w=1200&h=800&fit=crop');
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.85) 0%, rgba(30, 41, 59, 0.85) 100%), 
+                        url('https://images.unsplash.com/photo-1518611505868-d2b4fd09b592?w=1200&h=800&fit=crop');
             background-size: cover;
             background-position: center;
+            background-attachment: fixed;
             color: white;
-            padding: 100px 20px;
+            padding: 120px 20px;
             text-align: center;
-            min-height: 600px;
+            min-height: 700px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 107, 107, 0.1) 0%, transparent 50%);
+            pointer-events: none;
         }
         
         .hero h1 {
-            margin-bottom: 15px;
-            line-height: 1.2;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
         }
         
         .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            opacity: 0.95;
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
         }
         
         .hero-cta {
             display: flex;
-            gap: 15px;
+            gap: 20px;
             justify-content: center;
             flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
         }
         
         @media (max-width: 640px) {
-            .hero { padding: 60px 20px; }
-            .hero h1 { font-size: 1.8rem; }
-            .hero p { font-size: 1rem; }
-            .hero-cta { flex-direction: column; }
-            .hero-cta button, .hero-cta a { width: 100%; text-align: center; }
+            .hero { padding: 80px 20px; min-height: 600px; }
+            .hero h1 { font-size: 2rem; }
+            .hero p { font-size: 1.1rem; }
+            .hero-cta { flex-direction: column; width: 100%; }
+            .hero-cta button { width: 100%; }
         }
         
         /* ======================================
            SECTION STYLES
            ====================================== */
         .section {
-            padding: 80px 20px;
+            padding: 100px 20px;
             max-width: 1200px;
             margin: 0 auto;
-            transition: background-color 0.3s ease;
-        }
-        
-        .section.bg-gray-50 {
-            background: #F7FAFC;
         }
         
         .section-title {
-            font-size: 2rem;
+            font-size: 2.5rem;
             text-align: center;
-            margin-bottom: 50px;
-            color: var(--color-light-text);
-        }
-        
-        html.dark .section-title {
-            color: var(--color-dark-text);
+            margin-bottom: 60px;
+            color: var(--text-primary);
         }
         
         .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .grid-3 {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
         }
         
-        .card-3d {
-            padding: 30px;
-            text-align: center;
-        }
-        
+        /* ======================================
+           CARD STYLES
+           ====================================== */
         .card-icon {
-            font-size: 2.5rem;
-            color: var(--color-primary);
+            font-size: 3rem;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+        }
+        
+        .glass-card h3 {
+            font-size: 1.4rem;
             margin-bottom: 15px;
+            color: var(--text-primary);
         }
         
-        .card-3d h3 {
-            font-size: 1.3rem;
-            margin-bottom: 12px;
-        }
-        
-        .card-3d p {
-            color: #666;
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-        
-        html.dark .card-3d p {
-            color: #aaa;
-        }
-        
-        /* ======================================
-           EXERCISE CARD STYLES
-           ====================================== */
-        .exercise-card {
-            background: white;
-            border-radius: var(--radius-card);
-            padding: 20px;
-            box-shadow: var(--shadow-subtle);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .exercise-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-card);
-        }
-        
-        .exercise-card.hidden { display: none; }
-        
-        .exercise-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: start;
-            margin-bottom: 12px;
-        }
-        
-        .exercise-card h4 {
-            font-size: 1.1rem;
-            margin-bottom: 8px;
-            font-family: var(--font-heading);
-        }
-        
-        .difficulty-badge {
-            font-size: 0.75rem;
-            padding: 4px 8px;
-            border-radius: 20px;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-        
-        .difficulty-easy { background: #d4edda; color: #155724; }
-        .difficulty-medium { background: #fff3cd; color: #856404; }
-        .difficulty-hard { background: #f8d7da; color: #721c24; }
-        
-        .exercise-info {
-            font-size: 0.9rem;
-            color: #666;
-            margin-bottom: 12px;
-        }
-        
-        html.dark .exercise-info {
-            color: #aaa;
-        }
-        
-        .exercise-cues {
-            font-size: 0.9rem;
+        .glass-card p {
+            color: var(--text-secondary);
+            font-size: 1rem;
             line-height: 1.6;
-            color: #555;
-            border-left: 3px solid var(--color-secondary);
-            padding-left: 12px;
-        }
-        
-        html.dark .exercise-cues {
-            color: #aaa;
         }
         
         /* ======================================
-           PRICING CARD STYLES
+           BUTTON STYLES
            ====================================== */
-        .pricing-card {
-            background: white;
-            border-radius: var(--radius-card);
-            padding: 40px 30px;
-            text-align: center;
-            box-shadow: var(--shadow-subtle);
-            position: relative;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        .btn-primary {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+            color: white;
+            padding: 14px 32px;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+            font-family: var(--font-body);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+            font-size: 1rem;
         }
         
-        .pricing-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-card);
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(255, 107, 107, 0.5);
         }
         
-        .pricing-card.featured {
-            border: 3px solid var(--color-primary);
-            transform: scale(1.05);
+        .btn-secondary {
+            background: transparent;
+            color: var(--color-primary);
+            border: 2px solid var(--color-primary);
+            padding: 12px 30px;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: var(--font-body);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+            font-size: 1rem;
         }
         
-        .pricing-card.featured:hover {
-            transform: scale(1.05) translateY(-5px);
-        }
-        
-        .pricing-badge {
-            position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
+        .btn-secondary:hover {
             background: var(--color-primary);
             color: white;
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            text-transform: uppercase;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(255, 107, 107, 0.4);
         }
         
-        .pricing-card h3 {
-            font-size: 1.3rem;
-            margin: 15px 0;
+        .btn-ghost {
+            background: transparent;
+            color: var(--text-primary);
+            border: none;
+            padding: 8px 16px;
+            border-radius: var(--radius-sm);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: var(--font-body);
         }
         
-        .price {
-            font-size: 2rem;
-            color: var(--color-primary);
-            font-weight: 800;
-            margin: 15px 0;
-        }
-        
-        .pricing-card ul {
-            list-style: none;
-            text-align: left;
-            margin: 25px 0;
-            font-size: 0.95rem;
-        }
-        
-        .pricing-card li {
-            padding: 10px 0;
-            border-bottom: 1px solid #e2e8f0;
-        }
-        
-        html.dark .pricing-card li {
-            border-bottom-color: rgba(255, 255, 255, 0.1);
-        }
-        
-        .pricing-card li:before {
-            content: "✓ ";
+        .btn-ghost:hover {
+            background: rgba(78, 205, 196, 0.1);
             color: var(--color-secondary);
-            font-weight: bold;
-            margin-right: 8px;
         }
         
         /* ======================================
            FORM STYLES
            ====================================== */
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 24px;
         }
         
         .form-group label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             font-weight: 600;
-            color: var(--color-light-text);
-        }
-        
-        html.dark .form-group label {
-            color: var(--color-dark-text);
+            color: var(--text-primary);
         }
         
         .form-group input,
         .form-group select,
         .form-group textarea {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #e2e8f0;
-            border-radius: var(--radius-button);
+            padding: 14px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
             font-family: var(--font-body);
             font-size: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+            transition: all 0.2s ease;
+        }
+        
+        html:not(.dark) .form-group input,
+        html:not(.dark) .form-group select,
+        html:not(.dark) .form-group textarea {
             background: white;
-            color: var(--color-light-text);
-            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            color: var(--light-text-primary);
         }
         
         .form-group input:focus,
@@ -686,20 +478,20 @@
         .form-group textarea:focus {
             outline: none;
             border-color: var(--color-primary);
-            box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+            box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.2);
         }
         
         /* ======================================
-           CALCULATOR RESULT STYLES
+           CALCULATOR STYLES
            ====================================== */
         .calculator-result {
-            background: var(--color-light-bg);
-            padding: 20px;
-            border-radius: var(--radius-button);
-            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 24px;
+            border-radius: var(--radius-sm);
+            margin-top: 24px;
             text-align: center;
             display: none;
-            transition: background-color 0.3s ease;
+            border: 1px solid var(--border-color);
         }
         
         .calculator-result.show { display: block; }
@@ -713,30 +505,192 @@
             overflow: hidden;
         }
         
-        .macro-protein { background: #FF6B6B; }
-        .macro-carbs { background: #4ECDC4; }
-        .macro-fats { background: #FFE66D; }
+        .macro-protein { background: var(--color-primary); }
+        .macro-carbs { background: var(--color-secondary); }
+        .macro-fats { background: var(--color-accent); }
         
         .bmi-gauge {
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 800;
             margin: 20px 0;
-            color: var(--color-primary);
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         .bmi-category {
             font-size: 1.2rem;
             padding: 12px 24px;
-            border-radius: var(--radius-button);
+            border-radius: var(--radius-sm);
             display: inline-block;
             font-weight: 600;
             margin-top: 15px;
         }
         
-        .bmi-underweight { background: #d4edda; color: #155724; }
-        .bmi-normal { background: #cfe2ff; color: #084298; }
-        .bmi-overweight { background: #fff3cd; color: #664d03; }
-        .bmi-obese { background: #f8d7da; color: #842029; }
+        .bmi-underweight { background: rgba(78, 205, 196, 0.2); color: var(--color-secondary); }
+        .bmi-normal { background: rgba(78, 205, 196, 0.2); color: var(--color-secondary); }
+        .bmi-overweight { background: rgba(255, 230, 109, 0.2); color: var(--color-accent); }
+        .bmi-obese { background: rgba(255, 107, 107, 0.2); color: var(--color-primary); }
+        
+        /* ======================================
+           EXERCISE CARD STYLES
+           ====================================== */
+        .exercise-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 24px;
+            transition: all 0.3s ease;
+        }
+        
+        html:not(.dark) .exercise-card {
+            background: white;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .exercise-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        html:not(.dark) .exercise-card:hover {
+            background: white;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .exercise-card.hidden { display: none; }
+        
+        .exercise-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 16px;
+        }
+        
+        .exercise-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            font-family: var(--font-heading);
+            color: var(--text-primary);
+        }
+        
+        .difficulty-badge {
+            font-size: 0.75rem;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .difficulty-easy { background: rgba(78, 205, 196, 0.2); color: var(--color-secondary); }
+        .difficulty-medium { background: rgba(255, 230, 109, 0.2); color: var(--color-accent); }
+        .difficulty-hard { background: rgba(255, 107, 107, 0.2); color: var(--color-primary); }
+        
+        .exercise-info {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+        
+        .exercise-cues {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            border-left: 3px solid var(--color-secondary);
+            padding-left: 16px;
+        }
+        
+        /* ======================================
+           PRICING CARD STYLES
+           ====================================== */
+        .pricing-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        html:not(.dark) .pricing-card {
+            background: white;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .pricing-card.featured {
+            border: 2px solid var(--color-primary);
+            transform: scale(1.05);
+            background: rgba(255, 107, 107, 0.05);
+        }
+        
+        html:not(.dark) .pricing-card.featured {
+            background: rgba(255, 107, 107, 0.05);
+        }
+        
+        .pricing-card.featured:hover {
+            transform: scale(1.05) translateY(-5px);
+        }
+        
+        .pricing-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+        }
+        
+        .pricing-card h3 {
+            font-size: 1.5rem;
+            margin: 20px 0;
+            color: var(--text-primary);
+        }
+        
+        .price {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin: 20px 0;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .pricing-card ul {
+            list-style: none;
+            text-align: left;
+            margin: 30px 0;
+            font-size: 1rem;
+        }
+        
+        .pricing-card li {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+        
+        .pricing-card li:before {
+            content: "✓ ";
+            color: var(--color-secondary);
+            font-weight: bold;
+            margin-right: 10px;
+        }
         
         /* ======================================
            FILTER & SEARCH STYLES
@@ -744,49 +698,62 @@
         .filter-buttons {
             display: flex;
             justify-content: center;
-            gap: 10px;
-            margin-bottom: 30px;
+            gap: 12px;
+            margin-bottom: 40px;
             flex-wrap: wrap;
         }
         
         .filter-btn {
-            padding: 8px 16px;
-            border: 2px solid #e2e8f0;
-            background: white;
-            color: var(--color-light-text);
-            border-radius: 20px;
+            padding: 10px 20px;
+            border: 2px solid var(--border-color);
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-secondary);
+            border-radius: 25px;
             cursor: pointer;
             font-weight: 600;
             transition: all 0.3s ease;
         }
         
+        html:not(.dark) .filter-btn {
+            background: white;
+            border: 2px solid rgba(0, 0, 0, 0.1);
+            color: var(--light-text-secondary);
+        }
+        
         .filter-btn.active {
-            background: var(--color-primary);
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
             color: white;
             border-color: var(--color-primary);
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
         }
         
         .search-box {
-            margin-bottom: 30px;
-            max-width: 400px;
+            margin-bottom: 40px;
+            max-width: 500px;
             margin-left: auto;
             margin-right: auto;
         }
         
         .search-box input {
             width: 100%;
-            padding: 12px;
-            border: 2px solid #e2e8f0;
-            border-radius: var(--radius-button);
+            padding: 14px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
             font-size: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+            transition: all 0.2s ease;
+        }
+        
+        html:not(.dark) .search-box input {
             background: white;
-            color: var(--color-light-text);
-            transition: border-color 0.2s ease;
+            color: var(--light-text-primary);
         }
         
         .search-box input:focus {
             outline: none;
             border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.2);
         }
         
         /* ======================================
@@ -795,14 +762,14 @@
         .about-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 50px;
+            gap: 60px;
             align-items: center;
         }
         
         .about-image {
-            border-radius: var(--radius-card);
+            border-radius: var(--radius-md);
             overflow: hidden;
-            box-shadow: var(--shadow-subtle);
+            box-shadow: var(--shadow-lg);
         }
         
         .about-image img {
@@ -812,25 +779,22 @@
         }
         
         .about-text h2 {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
+            font-size: 2rem;
+            margin-bottom: 24px;
+            color: var(--text-primary);
         }
         
         .about-text p {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             line-height: 1.8;
-            color: #555;
-        }
-        
-        html.dark .about-text p {
-            color: #aaa;
+            color: var(--text-secondary);
         }
         
         .stats {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-top: 30px;
+            gap: 30px;
+            margin-top: 40px;
         }
         
         .stat {
@@ -838,27 +802,27 @@
         }
         
         .stat-number {
-            font-size: 2rem;
-            color: var(--color-primary);
+            font-size: 2.5rem;
             font-weight: 800;
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
         .stat-label {
-            font-size: 0.9rem;
-            color: #666;
-            margin-top: 5px;
-        }
-        
-        html.dark .stat-label {
-            color: #aaa;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-top: 8px;
         }
         
         .map-container {
-            margin-top: 30px;
-            border-radius: var(--radius-card);
+            margin-top: 40px;
+            border-radius: var(--radius-md);
             overflow: hidden;
-            box-shadow: var(--shadow-subtle);
-            height: 300px;
+            box-shadow: var(--shadow-lg);
+            height: 350px;
+            border: 1px solid var(--border-color);
         }
         
         .map-container iframe {
@@ -874,106 +838,68 @@
             display: none;
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(4px);
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
             z-index: 9998;
             animation: fadeIn 0.3s ease;
         }
         
         #whatsapp-modal.active {
             display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .whatsapp-modal-content {
-            background: white;
-            border-radius: var(--radius-card);
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
             max-width: 500px;
             width: 90%;
             max-height: 85vh;
             overflow-y: auto;
-            box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
             animation: slideUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
         
-        html.dark .whatsapp-modal-content {
-            background: #2D3748;
-            color: var(--color-dark-text);
+        html:not(.dark) .whatsapp-modal-content {
+            background: white;
         }
         
         #whatsapp-trigger {
             position: fixed;
-            bottom: 24px;
-            right: 24px;
-            width: 56px;
-            height: 56px;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
-            background: #25D366;
+            background: linear-gradient(135deg, #25D366 0%, #20BA5A 100%);
             color: white;
             border: none;
             cursor: pointer;
-            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.5);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
+            font-size: 28px;
             transition: all 0.3s ease;
             z-index: 9997;
         }
         
         #whatsapp-trigger:hover {
             transform: scale(1.1);
-            box-shadow: 0 6px 16px rgba(37, 211, 102, 0.6);
-        }
-        
-        #whatsapp-trigger:active {
-            transform: scale(0.95);
-        }
-        
-        /* ======================================
-           ANIMATIONS
-           ====================================== */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-        
-        @keyframes slideUp {
-            from {
-                transform: translateY(20px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-        
-        @keyframes slideOut {
-            from {
-                transform: translateY(0);
-                opacity: 1;
-            }
-            to {
-                transform: translateY(20px);
-                opacity: 0;
-            }
-        }
-        
-        .modal-exit .whatsapp-modal-content {
-            animation: slideOut 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 6px 30px rgba(37, 211, 102, 0.7);
         }
         
         /* ======================================
            FOOTER STYLES
            ====================================== */
         .footer {
-            background: var(--color-dark-bg);
-            color: white;
-            padding: 50px 20px 20px;
+            background: var(--bg-primary);
+            border-top: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 60px 20px 30px;
+            margin-top: 80px;
         }
         
         .footer-content {
@@ -981,21 +907,22 @@
             margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-bottom: 30px;
+            gap: 40px;
+            margin-bottom: 40px;
         }
         
         .footer-section h4 {
-            margin-bottom: 15px;
-            font-size: 1.1rem;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
             font-family: var(--font-heading);
+            color: var(--text-primary);
         }
         
         .footer-section a {
             display: block;
-            color: #ccc;
+            color: var(--text-secondary);
             text-decoration: none;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             transition: color 0.3s ease;
         }
         
@@ -1004,52 +931,71 @@
         .social-icons {
             display: flex;
             gap: 15px;
-            margin-top: 10px;
+            margin-top: 15px;
         }
         
         .social-icons a {
             display: inline-flex;
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             align-items: center;
             justify-content: center;
-            background: rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border-color);
             border-radius: 50%;
             margin: 0;
-            transition: background-color 0.3s ease;
+            transition: all 0.3s ease;
         }
         
         .social-icons a:hover {
             background: var(--color-primary);
             color: white;
+            border-color: var(--color-primary);
+            transform: translateY(-3px);
         }
         
         .footer-bottom {
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 30px;
             text-align: center;
-            color: #aaa;
+            color: var(--text-tertiary);
             font-size: 0.9rem;
         }
         
+        /* ======================================
+           ANIMATIONS
+           ====================================== */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        /* ======================================
+           RESPONSIVE
+           ====================================== */
         @media (max-width: 768px) {
             .about-content { grid-template-columns: 1fr; }
             .stats { grid-template-columns: 1fr; }
             .pricing-card.featured { transform: scale(1); }
             .section { padding: 60px 20px; }
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.8rem; }
         }
         
         img { max-width: 100%; height: auto; }
-        
-        .smooth-scroll { scroll-behavior: smooth; }
     </style>
 </head>
-<body class="smooth-scroll">
+<body>
 
     <!-- Navigation -->
     <nav class="navbar">
         <div class="flex justify-between items-center max-w-6xl mx-auto px-6 py-4">
-            <div class="flex items-center gap-2 text-2xl font-bold" style="color: var(--color-primary);">
+            <div class="flex items-center gap-2 text-2xl font-bold gradient-text">
                 <i class="fas fa-dumbbell"></i>
                 <span>Alexandra Fitness</span>
             </div>
@@ -1067,7 +1013,6 @@
                 <a href="#pricing">Pricing</a>
                 <a href="#about">About</a>
                 <a href="#contact">Contact</a>
-                <!-- Dark Mode Toggle -->
                 <button id="dark-mode-toggle" class="btn-ghost" style="padding: 4px 12px; font-size: 1.2rem;">
                     <span class="light-icon">🌙</span>
                     <span class="dark-icon" style="display: none;">☀️</span>
@@ -1079,7 +1024,7 @@
     <!-- Hero Section -->
     <section class="hero" id="hero">
         <div>
-            <h1>Transform Your Body, Transform Your Life</h1>
+            <h1 class="gradient-text">Transform Your Body, Transform Your Life</h1>
             <p>Personal Training for Women in Stratford & Ilford</p>
             <div class="hero-cta">
                 <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">
@@ -1093,37 +1038,35 @@
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="section bg-gray-50">
-        <h2 class="section-title">
-            <span class="section-header-underline" data-animate="true">Our Services</span>
-        </h2>
-        <div class="grid-2">
-            <div class="card-3d p-6">
+    <section id="services" class="section">
+        <h2 class="section-title gradient-text">Our Services</h2>
+        <div class="grid-3">
+            <div class="glass-card p-8">
                 <div class="card-icon"><i class="fas fa-person-hiking"></i></div>
                 <h3>1:1 Personal Training</h3>
                 <p>Expert coaching at Pure Gym Stratford with personalized workout plans tailored to your goals.</p>
             </div>
-            <div class="card-3d p-6">
+            <div class="glass-card p-8">
                 <div class="card-icon"><i class="fas fa-video"></i></div>
                 <h3>Online Live Coaching</h3>
                 <p>Train from anywhere with real-time guidance and form correction via video sessions.</p>
             </div>
-            <div class="card-3d p-6">
+            <div class="glass-card p-8">
                 <div class="card-icon"><i class="fas fa-fire"></i></div>
                 <h3>Custom Workout Programs</h3>
                 <p>Tailored 4-12 week programs designed specifically for your fitness level and objectives.</p>
             </div>
-            <div class="card-3d p-6">
+            <div class="glass-card p-8">
                 <div class="card-icon"><i class="fas fa-apple-alt"></i></div>
                 <h3>Nutrition & Meal Planning</h3>
                 <p>Science-backed nutrition plans to fuel your workouts and achieve sustainable results.</p>
             </div>
-            <div class="card-3d p-6">
+            <div class="glass-card p-8">
                 <div class="card-icon"><i class="fas fa-chart-line"></i></div>
                 <h3>Weight Loss Transformation</h3>
                 <p>Comprehensive programs combining strength training and nutrition for lasting transformation.</p>
             </div>
-            <div class="card-3d p-6">
+            <div class="glass-card p-8">
                 <div class="card-icon"><i class="fas fa-bolt"></i></div>
                 <h3>Strength & Toning</h3>
                 <p>Build lean muscle, increase strength, and sculpt your physique with proven methods.</p>
@@ -1133,13 +1076,11 @@
 
     <!-- Interactive Tools Section -->
     <section id="tools" class="section">
-        <h2 class="section-title">
-            <span class="section-header-underline" data-animate="true">Fitness Calculators</span>
-        </h2>
+        <h2 class="section-title gradient-text">Fitness Calculators</h2>
         
         <div class="grid-2">
             <!-- Calorie Calculator -->
-            <div class="card-3d p-6">
+            <div class="glass-card p-8">
                 <h3><i class="fas fa-calculator" style="color: var(--color-primary);"></i> Calorie Calculator</h3>
                 <form id="calorieForm" onsubmit="calculateCalories(event)">
                     <div class="form-group">
@@ -1177,34 +1118,34 @@
                 </form>
                 <div id="calorieResult" class="calculator-result">
                     <div>
-                        <p style="color: #666; font-size: 0.9rem;">Basal Metabolic Rate</p>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;">Basal Metabolic Rate</p>
                         <div class="bmi-gauge" id="bmrValue">0</div>
-                        <p style="color: #666; font-size: 0.9rem; margin-bottom: 20px;">kcal/day</p>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 20px;">kcal/day</p>
                     </div>
                     <div>
-                        <p style="color: #666; font-size: 0.9rem;">Daily Calorie Needs</p>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;">Daily Calorie Needs</p>
                         <div class="bmi-gauge" id="tdeeValue">0</div>
-                        <p style="color: #666; font-size: 0.9rem;">kcal/day</p>
+                        <p style="color: var(--text-secondary); font-size: 0.9rem;">kcal/day</p>
                     </div>
                     <div style="margin-top: 20px; text-align: left;">
-                        <p style="font-weight: 600; margin-bottom: 10px;">Macro Breakdown:</p>
+                        <p style="font-weight: 600; margin-bottom: 10px; color: var(--text-primary);">Macro Breakdown:</p>
                         <div style="margin-bottom: 8px;">
                             <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
-                                <span>Protein (30%)</span>
-                                <span id="macroProtein">0g</span>
+                                <span style="color: var(--text-secondary);">Protein (30%)</span>
+                                <span id="macroProtein" style="color: var(--text-primary);">0g</span>
                             </div>
                             <div class="macro-bar"><div class="macro-protein" style="width: 30%;"></div><div class="macro-carbs" style="width: 40%;"></div><div class="macro-fats" style="width: 30%;"></div></div>
                         </div>
                         <div style="margin-bottom: 8px;">
                             <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
-                                <span>Carbs (40%)</span>
-                                <span id="macroCarbs">0g</span>
+                                <span style="color: var(--text-secondary);">Carbs (40%)</span>
+                                <span id="macroCarbs" style="color: var(--text-primary);">0g</span>
                             </div>
                         </div>
                         <div>
                             <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
-                                <span>Fats (30%)</span>
-                                <span id="macroFats">0g</span>
+                                <span style="color: var(--text-secondary);">Fats (30%)</span>
+                                <span id="macroFats" style="color: var(--text-primary);">0g</span>
                             </div>
                         </div>
                     </div>
@@ -1212,8 +1153,8 @@
             </div>
 
             <!-- BMI Calculator -->
-            <div class="card-3d p-6">
-                <h3><i class="fas fa-body" style="color: var(--color-primary);"></i> BMI Calculator</h3>
+            <div class="glass-card p-8">
+                <h3><i class="fas fa-weight" style="color: var(--color-primary);"></i> BMI Calculator</h3>
                 <form id="bmiForm" onsubmit="calculateBMI(event)">
                     <div class="form-group">
                         <label>Weight (kg)</label>
@@ -1227,9 +1168,9 @@
                 </form>
                 <div id="bmiResult" class="calculator-result">
                     <div class="bmi-gauge" id="bmiValue">0</div>
-                    <p style="color: #666; font-size: 0.9rem; margin-bottom: 15px;">BMI Score</p>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 15px;">BMI Score</p>
                     <div id="bmiCategory" class="bmi-category">-</div>
-                    <p style="color: #666; font-size: 0.85rem; margin-top: 15px; line-height: 1.5;">
+                    <p style="color: var(--text-secondary); font-size: 0.85rem; margin-top: 15px; line-height: 1.5;">
                         <strong>Note:</strong> BMI is a general health indicator. Consult with a healthcare professional for personalized advice.
                     </p>
                 </div>
@@ -1238,10 +1179,8 @@
     </section>
 
     <!-- Exercise Library Section -->
-    <section id="exercises" class="section bg-gray-50">
-        <h2 class="section-title">
-            <span class="section-header-underline" data-animate="true">Exercise Library</span>
-        </h2>
+    <section id="exercises" class="section">
+        <h2 class="section-title gradient-text">Exercise Library</h2>
         
         <div class="search-box">
             <input type="text" id="exerciseSearch" placeholder="Search exercises..." oninput="filterExercises()">
@@ -1261,17 +1200,15 @@
 
     <!-- Pricing Section -->
     <section id="pricing" class="section">
-        <h2 class="section-title">
-            <span class="section-header-underline" data-animate="true">Pricing Plans</span>
-        </h2>
-        <p style="text-align: center; color: #666; margin-bottom: 40px; font-size: 1.05rem;">
+        <h2 class="section-title gradient-text">Pricing Plans</h2>
+        <p style="text-align: center; color: var(--text-secondary); margin-bottom: 50px; font-size: 1.1rem;">
             <strong>First Session FREE</strong> - Start your transformation today!
         </p>
         
-        <div class="grid-2">
+        <div class="grid-3">
             <div class="pricing-card">
                 <h3>Starter</h3>
-                <div class="price">£199<span style="font-size: 1rem; color: #666;">/mo</span></div>
+                <div class="price">£199<span style="font-size: 1rem; color: var(--text-secondary);">/mo</span></div>
                 <ul>
                     <li>4 sessions per month</li>
                     <li>Personalized workout plans</li>
@@ -1284,7 +1221,7 @@
             <div class="pricing-card featured">
                 <div class="pricing-badge">Most Popular</div>
                 <h3>Transformation</h3>
-                <div class="price">£349<span style="font-size: 1rem; color: #666;">/mo</span></div>
+                <div class="price">£349<span style="font-size: 1rem; color: var(--text-secondary);">/mo</span></div>
                 <ul>
                     <li>8 sessions per month</li>
                     <li>Custom meal plan included</li>
@@ -1296,7 +1233,7 @@
             
             <div class="pricing-card">
                 <h3>Elite</h3>
-                <div class="price">£499<span style="font-size: 1rem; color: #666;">/mo</span></div>
+                <div class="price">£499<span style="font-size: 1rem; color: var(--text-secondary);">/mo</span></div>
                 <ul>
                     <li>12 sessions per month</li>
                     <li>Comprehensive meal planning</li>
@@ -1309,10 +1246,8 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="section bg-gray-50">
-        <h2 class="section-title">
-            <span class="section-header-underline" data-animate="true">About Alexandra</span>
-        </h2>
+    <section id="about" class="section">
+        <h2 class="section-title gradient-text">About Alexandra</h2>
         <div class="about-content">
             <div class="about-image">
                 <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=500&fit=crop" alt="Alexandra - Personal Trainer">
@@ -1345,7 +1280,7 @@
                 </div>
                 
                 <div class="map-container">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2482.3047717551637!2d0.0256!3d51.5414!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47d8a6e8d0000001%3A0x1234567890ab!2sPure%20Gym%20Stratford!5e0!3m2!1sen!2suk!4v1234567890" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2482.3047717551637!2d-0.0026!3d51.5414!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47d8a6e8d0f0a123%3A0x8b5c5d5e5f5g5h5i!2sPure%20Gym%20Stratford!5e0!3m2!1sen!2suk!4v1234567890" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
         </div>
@@ -1367,7 +1302,7 @@
             "postalCode": "E15",
             "addressCountry": "GB"
         },
-        "telephone": "+447000000000",
+        "telephone": "+447940053102",
         "priceRange": "£199-£499",
         "areaServed": [
             "Stratford",
@@ -1377,20 +1312,18 @@
             "East London"
         ],
         "sameAs": [
-            "https://www.instagram.com/alexandrafitness",
-            "https://www.facebook.com/alexandrafitness"
+            "https://www.instagram.com/alexandraapopaa/",
+            "https://www.puregym.com/gyms/london-stratford/personal-trainers/alexandra-popa/"
         ],
         "serviceType": ["Personal Training", "Online Coaching", "Nutrition Planning"]
     }
     </script>
 
     <!-- Contact Section -->
-    <section id="contact" class="section bg-gray-50">
-        <h2 class="section-title">
-            <span class="section-header-underline" data-animate="true">Get Started Today</span>
-        </h2>
+    <section id="contact" class="section">
+        <h2 class="section-title gradient-text">Get Started Today</h2>
         <div style="max-width: 600px; margin: 0 auto;">
-            <p style="text-align: center; color: #666; margin-bottom: 30px;">
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 40px; font-size: 1.1rem;">
                 Book your free consultation and let's start your transformation journey!
             </p>
             
@@ -1428,8 +1361,8 @@
                 </div>
                 
                 <button type="submit" class="btn-primary w-full" style="margin-bottom: 15px;">Send Message</button>
-                <p style="text-align: center; color: #666; font-size: 0.9rem;">
-                    Or use the <button type="button" onclick="openWhatsAppModal()" class="btn-ghost" style="padding: 0; text-decoration: underline; font-weight: 600;">WhatsApp form</button> in the bottom-right corner
+                <p style="text-align: center; color: var(--text-secondary); font-size: 0.9rem;">
+                    Or use the <button type="button" onclick="openWhatsAppModal()" class="btn-ghost" style="padding: 0; text-decoration: underline; font-weight: 600; color: var(--color-primary);">WhatsApp form</button> in the bottom-right corner
                 </p>
             </form>
         </div>
@@ -1439,11 +1372,11 @@
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">
-                <h4>Alexandra Fitness</h4>
-                <p style="color: #aaa;">Expert personal training in Stratford, Ilford & East London.</p>
+                <h4 class="gradient-text">Alexandra Fitness</h4>
+                <p style="color: var(--text-secondary);">Expert personal training in Stratford, Ilford & East London.</p>
                 <div class="social-icons">
-                    <a href="https://www.instagram.com/alexandrafitness" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="https://www.facebook.com/alexandrafitness" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/alexandraapopaa/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.puregym.com/gyms/london-stratford/personal-trainers/alexandra-popa/" target="_blank" title="Pure Gym"><i class="fas fa-dumbbell"></i></a>
                     <a href="https://wa.me/447940053102" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
                 </div>
             </div>
@@ -1468,105 +1401,98 @@
             
             <div class="footer-section">
                 <h4>Contact</h4>
-                <a href="tel:+447000000000">+44 700 000 0000</a>
+                <a href="tel:+447940053102">+44 7940 053102</a>
                 <a href="https://wa.me/447940053102" target="_blank">WhatsApp</a>
-                <p style="color: #aaa; font-size: 0.9rem; margin-top: 10px;">Pure Gym Stratford<br>Stratford, London E15</p>
+                <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 10px;">Pure Gym Stratford<br>Stratford, London E15</p>
             </div>
         </div>
         
         <div class="footer-bottom">
-            <p>© 2026 Alexandra Fitness. All rights reserved. | <a href="#" style="color: #aaa;">Privacy Policy</a> | <a href="#" style="color: #aaa;">Terms & Conditions</a></p>
-            <p style="margin-top: 10px;">Design Concept by SAL Digital - <a href="https://syedlatief.com" style="color: #aaa;" target="_blank">syedlatief.com</a></p>
+            <p>© 2026 Alexandra Fitness. All rights reserved. | <a href="#" style="color: var(--text-tertiary);">Privacy Policy</a> | <a href="#" style="color: var(--text-tertiary);">Terms & Conditions</a></p>
+            <p style="margin-top: 10px;">Design Concept by SAL Digital - <a href="https://syedlatief.com" style="color: var(--text-tertiary);" target="_blank">syedlatief.com</a></p>
         </div>
     </footer>
 
     <!-- WhatsApp Modal -->
     <div id="whatsapp-modal">
         <div class="whatsapp-modal-content p-8">
-            <!-- Close Button -->
             <div class="flex justify-between items-center mb-6">
-                <h3 class="text-2xl font-bold">Let's Get You Started</h3>
-                <button id="whatsapp-close" class="text-2xl leading-none" style="background: none; border: none; cursor: pointer; padding: 0;">&times;</button>
+                <h3 class="text-2xl font-bold gradient-text">Let's Get You Started</h3>
+                <button id="whatsapp-close" class="text-2xl leading-none" style="background: none; border: none; cursor: pointer; padding: 0; color: var(--text-primary);">&times;</button>
             </div>
             
-            <!-- Qualification Form -->
             <form id="whatsapp-form" class="space-y-6">
-                
-                <!-- Goal -->
                 <div>
-                    <label class="block font-semibold mb-3">What's Your Fitness Goal?</label>
+                    <label class="block font-semibold mb-3" style="color: var(--text-primary);">What's Your Fitness Goal?</label>
                     <div class="space-y-2">
-                        <label class="flex items-center" style="cursor: pointer;">
+                        <label class="flex items-center" style="cursor: pointer; color: var(--text-secondary);">
                             <input type="radio" name="goal" value="Weight Loss" class="mr-3" required>
                             <span>Weight Loss</span>
                         </label>
-                        <label class="flex items-center" style="cursor: pointer;">
+                        <label class="flex items-center" style="cursor: pointer; color: var(--text-secondary);">
                             <input type="radio" name="goal" value="Muscle Gain" class="mr-3">
                             <span>Muscle Gain</span>
                         </label>
-                        <label class="flex items-center" style="cursor: pointer;">
+                        <label class="flex items-center" style="cursor: pointer; color: var(--text-secondary);">
                             <input type="radio" name="goal" value="General Fitness" class="mr-3">
                             <span>General Fitness</span>
                         </label>
-                        <label class="flex items-center" style="cursor: pointer;">
+                        <label class="flex items-center" style="cursor: pointer; color: var(--text-secondary);">
                             <input type="radio" name="goal" value="Athletic Performance" class="mr-3">
                             <span>Athletic Performance</span>
                         </label>
                     </div>
                 </div>
                 
-                <!-- Level -->
                 <div>
-                    <label class="block font-semibold mb-3">What's Your Fitness Level?</label>
+                    <label class="block font-semibold mb-3" style="color: var(--text-primary);">What's Your Fitness Level?</label>
                     <div class="space-y-2">
-                        <label class="flex items-center" style="cursor: pointer;">
+                        <label class="flex items-center" style="cursor: pointer; color: var(--text-secondary);">
                             <input type="radio" name="level" value="Beginner" class="mr-3" required>
                             <span>Beginner</span>
                         </label>
-                        <label class="flex items-center" style="cursor: pointer;">
+                        <label class="flex items-center" style="cursor: pointer; color: var(--text-secondary);">
                             <input type="radio" name="level" value="Intermediate" class="mr-3">
                             <span>Intermediate</span>
                         </label>
-                        <label class="flex items-center" style="cursor: pointer;">
+                        <label class="flex items-center" style="cursor: pointer; color: var(--text-secondary);">
                             <input type="radio" name="level" value="Advanced" class="mr-3">
                             <span>Advanced</span>
                         </label>
                     </div>
                 </div>
                 
-                <!-- Location -->
                 <div>
-                    <label class="block font-semibold mb-3">Where Are You Located?</label>
-                    <select name="location" class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white form-group" style="margin: 0;" required>
+                    <label class="block font-semibold mb-3" style="color: var(--text-primary);">Where Are You Located?</label>
+                    <select name="location" class="w-full p-3 rounded-lg" style="background: rgba(255,255,255,0.05); color: var(--text-primary); border: 1px solid var(--border-color);" required>
                         <option value="">Select location...</option>
-                        <option value="London">London</option>
-                        <option value="Manchester">Manchester</option>
-                        <option value="Birmingham">Birmingham</option>
+                        <option value="Stratford">Stratford</option>
+                        <option value="Forest Gate">Forest Gate</option>
+                        <option value="Upton Park">Upton Park</option>
+                        <option value="Leyton">Leyton</option>
                         <option value="Online">Online</option>
                         <option value="Other">Other</option>
                     </select>
                 </div>
                 
-                <!-- Timeline -->
                 <div>
-                    <label class="block font-semibold mb-3">When Can You Start?</label>
+                    <label class="block font-semibold mb-3" style="color: var(--text-primary);">When Can You Start?</label>
                     <div class="space-y-2">
-                        <label class="flex items-center" style="cursor: pointer;">
+                        <label class="flex items-center" style="cursor: pointer; color: var(--text-secondary);">
                             <input type="radio" name="timeline" value="Immediately" class="mr-3" required>
                             <span>Immediately</span>
                         </label>
-                        <label class="flex items-center" style="cursor: pointer;">
+                        <label class="flex items-center" style="cursor: pointer; color: var(--text-secondary);">
                             <input type="radio" name="timeline" value="This Week" class="mr-3">
                             <span>This Week</span>
                         </label>
-                        <label class="flex items-center" style="cursor: pointer;">
+                        <label class="flex items-center" style="cursor: pointer; color: var(--text-secondary);">
                             <input type="radio" name="timeline" value="Next Month" class="mr-3">
                             <span>Next Month</span>
                         </label>
                     </div>
                 </div>
                 
-                <!-- Submit Button -->
                 <button type="submit" class="btn-primary w-full justify-center" style="width: 100%;">
                     Send to WhatsApp
                 </button>
@@ -1584,12 +1510,6 @@
         // ===== DARK MODE TOGGLE =====
         const darkModeToggle = document.getElementById('dark-mode-toggle');
         const html = document.documentElement;
-        
-        // Check for saved dark mode preference
-        if (localStorage.getItem('darkMode') === 'enabled') {
-            html.classList.add('dark');
-            updateDarkModeIcon();
-        }
         
         darkModeToggle.addEventListener('click', () => {
             html.classList.toggle('dark');
@@ -1616,81 +1536,48 @@
             }
         }
 
-        // ===== SECTION HEADER UNDERLINE ANIMATION =====
-        const sectionHeaders = document.querySelectorAll('.section-header-underline[data-animate]');
-        
-        const animateOnScroll = (entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate');
-                }
-            });
-        };
-        
-        const observer = new IntersectionObserver(animateOnScroll, {
-            threshold: 0.5
-        });
-        
-        sectionHeaders.forEach(header => observer.observe(header));
-
         // ===== WHATSAPP MODAL FUNCTIONALITY =====
         const whatsappTrigger = document.getElementById('whatsapp-trigger');
         const whatsappModal = document.getElementById('whatsapp-modal');
         const whatsappClose = document.getElementById('whatsapp-close');
         const whatsappForm = document.getElementById('whatsapp-form');
         
-        // Open modal
         function openWhatsAppModal() {
             whatsappModal.classList.add('active');
         }
         
         whatsappTrigger.addEventListener('click', openWhatsAppModal);
         
-        // Close modal
         const closeModal = () => {
-            whatsappModal.classList.add('modal-exit');
-            setTimeout(() => {
-                whatsappModal.classList.remove('active', 'modal-exit');
-            }, 300);
+            whatsappModal.classList.remove('active');
         };
         
         whatsappClose.addEventListener('click', closeModal);
         
-        // Close on background click
         whatsappModal.addEventListener('click', (e) => {
             if (e.target === whatsappModal) {
                 closeModal();
             }
         });
         
-        // Form submission
         whatsappForm.addEventListener('submit', (e) => {
             e.preventDefault();
             
-            // Get form values
             const goal = document.querySelector('input[name="goal"]:checked')?.value || '';
             const level = document.querySelector('input[name="level"]:checked')?.value || '';
             const location = document.querySelector('select[name="location"]').value || '';
             const timeline = document.querySelector('input[name="timeline"]:checked')?.value || '';
             
-            // Build WhatsApp message
             const message = `Hi! I'm interested in starting my fitness journey with Alexandra.\n\nGoal: ${goal}\nFitness Level: ${level}\nLocation: ${location}\nTimeline: ${timeline}\n\nLooking forward to hearing from you!`;
             
-            // Encode message for URL
             const encodedMessage = encodeURIComponent(message);
             const whatsappURL = `https://wa.me/447940053102?text=${encodedMessage}`;
             
-            // Open WhatsApp
             window.open(whatsappURL, '_blank');
-            
-            // Close modal
             closeModal();
-            
-            // Reset form
             whatsappForm.reset();
         });
         
-        // Close modal on Escape key
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && whatsappModal.classList.contains('active')) {
                 closeModal();
@@ -1706,7 +1593,6 @@
             navMenu.classList.toggle('active');
         });
         
-        // Close menu when link is clicked
         document.querySelectorAll('.nav-menu a').forEach(link => {
             link.addEventListener('click', () => {
                 hamburger.classList.remove('active');
@@ -1774,7 +1660,6 @@
             }
         ];
 
-        // ===== GENERATE EXERCISE CARDS =====
         function renderExercises(filter = 'all', search = '') {
             const exerciseList = document.getElementById('exerciseList');
             exerciseList.innerHTML = '';
@@ -1786,7 +1671,7 @@
             });
             
             if (filtered.length === 0) {
-                exerciseList.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #999;">No exercises found.</p>';
+                exerciseList.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: var(--text-tertiary);">No exercises found.</p>';
                 return;
             }
             
@@ -1811,7 +1696,6 @@
             });
         }
 
-        // ===== FILTER EXERCISES BY CATEGORY =====
         let currentFilter = 'all';
         function filterByCategory(category) {
             currentFilter = category;
@@ -1820,16 +1704,14 @@
             renderExercises(category, document.getElementById('exerciseSearch').value);
         }
 
-        // ===== FILTER EXERCISES BY SEARCH =====
         function filterExercises() {
             const search = document.getElementById('exerciseSearch').value;
             renderExercises(currentFilter, search);
         }
 
-        // Initialize exercises on load
         renderExercises();
 
-        // ===== CALORIE CALCULATOR (Mifflin-St Jeor Equation) =====
+        // ===== CALORIE CALCULATOR =====
         function calculateCalories(e) {
             e.preventDefault();
             
@@ -1899,7 +1781,7 @@
             document.getElementById('bmiResult').classList.add('show');
         }
 
-        // ===== BOOK SERVICE FUNCTION =====
+        // ===== BOOK SERVICE =====
         function bookService(service) {
             const message = `Hi Alexandra, I'm interested in the ${service}. Can we discuss this further?`;
             window.open(`https://wa.me/447940053102?text=${encodeURIComponent(message)}`, '_blank');
@@ -1919,11 +1801,10 @@
             
             window.open(`https://wa.me/447940053102?text=${encodeURIComponent(whatsappMessage)}`, '_blank');
             
-            // Reset form
             document.getElementById('contactForm').reset();
         }
 
-        // Smooth scroll for anchor links
+        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 const href = this.getAttribute('href');
@@ -1937,7 +1818,7 @@
             });
         });
 
-        // Lazy loading hint for images
+        // Lazy loading
         const images = document.querySelectorAll('img');
         images.forEach(img => {
             img.loading = 'lazy';
