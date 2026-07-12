@@ -1,0 +1,650 @@
+<!-- ALEXANDRA FIT - GLOBAL DESIGN SYSTEM & COMPONENT LIBRARY -->
+<!-- Pure HTML5 + Tailwind CSS (CDN) - Zero Build Step -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design System - Alexandra Fit</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Poppins (700, 800) & Inter (400, 500) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@700;800&display=swap" rel="stylesheet">
+    
+    <!-- Global Style Block with Design Tokens & Dark Mode -->
+    <style>
+        /* ======================================
+           DESIGN TOKENS - STRICT ADHERENCE
+           ====================================== */
+        :root {
+            /* Color Palette */
+            --color-primary: #FF6B6B;        /* Coral */
+            --color-secondary: #4ECDC4;      /* Turquoise */
+            --color-accent: #FFE66D;         /* Gold */
+            
+            /* Light Mode */
+            --color-light-bg: #F7FAFC;
+            --color-light-text: #1A202C;
+            
+            /* Dark Mode */
+            --color-dark-bg: #1A202C;
+            --color-dark-text: #F7FAFC;
+            
+            /* Shadows */
+            --shadow-subtle: 0 4px 6px rgba(0, 0, 0, 0.07);
+            --shadow-card: 0 10px 15px rgba(0, 0, 0, 0.08);
+            
+            /* Border Radius */
+            --radius-card: 12px;
+            --radius-button: 8px;
+            
+            /* Typography */
+            --font-heading: 'Poppins', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+        
+        /* ======================================
+           BASE TYPOGRAPHY
+           ====================================== */
+        * {
+            font-family: var(--font-body);
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            font-weight: 800;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        body {
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.6;
+        }
+        
+        /* ======================================
+           LIGHT MODE (Default)
+           ====================================== */
+        body {
+            background-color: var(--color-light-bg);
+            color: var(--color-light-text);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        /* ======================================
+           DARK MODE TOGGLE
+           ====================================== */
+        html.dark {
+            background-color: var(--color-dark-bg);
+            color: var(--color-dark-text);
+        }
+        
+        html.dark body {
+            background-color: var(--color-dark-bg);
+            color: var(--color-dark-text);
+        }
+        
+        html.dark .bg-light {
+            background-color: #2D3748;
+        }
+        
+        html.dark .text-dark {
+            color: var(--color-dark-text);
+        }
+        
+        /* ======================================
+           SECTION HEADER UNDERLINE ANIMATION
+           ====================================== */
+        .section-header-underline {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 8px;
+        }
+        
+        .section-header-underline::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--color-secondary), var(--color-accent));
+            transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        .section-header-underline.animate::after {
+            width: 100%;
+        }
+        
+        /* ======================================
+           CARD 3D HOVER EFFECT
+           ====================================== */
+        .card-3d {
+            background: white;
+            border-radius: var(--radius-card);
+            box-shadow: var(--shadow-subtle);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+                        box-shadow 0.3s ease;
+            will-change: transform;
+        }
+        
+        html.dark .card-3d {
+            background: #2D3748;
+            color: var(--color-dark-text);
+        }
+        
+        .card-3d:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-card);
+        }
+        
+        /* ======================================
+           BUTTON STYLES
+           ====================================== */
+        .btn-primary {
+            background: linear-gradient(135deg, var(--color-primary), #FF8A8A);
+            color: white;
+            padding: 12px 24px;
+            border-radius: var(--radius-button);
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: var(--shadow-subtle);
+            font-family: var(--font-body);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(255, 107, 107, 0.3);
+        }
+        
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--color-primary);
+            border: 2px solid var(--color-primary);
+            padding: 10px 22px;
+            border-radius: var(--radius-button);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: var(--font-body);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--color-primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        html.dark .btn-secondary {
+            color: var(--color-secondary);
+            border-color: var(--color-secondary);
+        }
+        
+        html.dark .btn-secondary:hover {
+            background: var(--color-secondary);
+            color: var(--color-dark-bg);
+        }
+        
+        .btn-ghost {
+            background: transparent;
+            color: var(--color-light-text);
+            border: none;
+            padding: 8px 16px;
+            border-radius: var(--radius-button);
+            font-weight: 400;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: var(--font-body);
+        }
+        
+        html.dark .btn-ghost {
+            color: var(--color-dark-text);
+        }
+        
+        .btn-ghost:hover {
+            background: rgba(78, 205, 196, 0.1);
+            color: var(--color-secondary);
+        }
+        
+        /* ======================================
+           WHATSAPP MODAL STYLES
+           ====================================== */
+        #whatsapp-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            z-index: 9998;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        #whatsapp-modal.active {
+            display: flex;
+        }
+        
+        .whatsapp-modal-content {
+            background: white;
+            border-radius: 12px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
+            animation: slideUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        html.dark .whatsapp-modal-content {
+            background: #2D3748;
+            color: var(--color-dark-text);
+        }
+        
+        #whatsapp-trigger {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: #25D366;
+            color: white;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            transition: all 0.3s ease;
+            z-index: 9997;
+        }
+        
+        #whatsapp-trigger:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(37, 211, 102, 0.6);
+        }
+        
+        #whatsapp-trigger:active {
+            transform: scale(0.95);
+        }
+        
+        /* ======================================
+           ANIMATIONS
+           ====================================== */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideOut {
+            from {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+        }
+        
+        .modal-exit .whatsapp-modal-content {
+            animation: slideOut 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+    </style>
+</head>
+<body>
+    <!-- EXAMPLE PAGE WITH ALL COMPONENTS -->
+    
+    <!-- Dark Mode Toggle (Top Right) -->
+    <nav class="flex justify-between items-center p-6 border-b border-gray-200 dark:border-gray-700">
+        <h1 class="text-2xl font-bold text-primary">Alexandra Fit</h1>
+        <button id="dark-mode-toggle" class="btn-ghost">
+            <span class="light-icon">🌙</span>
+            <span class="dark-icon" style="display: none;">☀️</span>
+        </button>
+    </nav>
+    
+    <main class="max-w-6xl mx-auto px-6 py-12">
+        
+        <!-- ===== BUTTON COMPONENT EXAMPLES ===== -->
+        <section class="mb-16">
+            <h2 class="text-3xl mb-8">Buttons</h2>
+            
+            <div class="space-y-4">
+                <div class="flex flex-wrap gap-4">
+                    <button class="btn-primary">
+                        ✓ Primary Button
+                    </button>
+                    <button class="btn-secondary">
+                        Secondary Button
+                    </button>
+                    <button class="btn-ghost">
+                        Ghost Button
+                    </button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- ===== SECTION HEADER COMPONENT EXAMPLE ===== -->
+        <section class="mb-16">
+            <h2 class="section-header-underline text-3xl mb-8" data-animate="true">
+                Featured Services
+            </h2>
+            <p class="text-gray-600 dark:text-gray-400 mb-8">
+                Scroll to see the underline animation on the heading above.
+            </p>
+        </section>
+        
+        <!-- ===== CARD 3D COMPONENT EXAMPLES ===== -->
+        <section class="mb-16">
+            <h2 class="text-3xl mb-8">Cards (3D Hover Effect)</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="card-3d p-6">
+                    <div class="w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-lg mb-4"></div>
+                    <h3 class="text-xl font-bold mb-3">Personal Training</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">
+                        One-on-one sessions tailored to your fitness goals.
+                    </p>
+                    <button class="btn-primary text-sm">Learn More</button>
+                </div>
+                
+                <!-- Card 2 -->
+                <div class="card-3d p-6">
+                    <div class="w-12 h-12 bg-gradient-to-br from-secondary to-accent rounded-lg mb-4"></div>
+                    <h3 class="text-xl font-bold mb-3">Group Classes</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">
+                        Join our energizing group fitness sessions.
+                    </p>
+                    <button class="btn-primary text-sm">Learn More</button>
+                </div>
+                
+                <!-- Card 3 -->
+                <div class="card-3d p-6">
+                    <div class="w-12 h-12 bg-gradient-to-br from-accent to-primary rounded-lg mb-4"></div>
+                    <h3 class="text-xl font-bold mb-3">Nutrition Plan</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">
+                        Custom meal plans to complement your fitness journey.
+                    </p>
+                    <button class="btn-primary text-sm">Learn More</button>
+                </div>
+            </div>
+        </section>
+        
+        <!-- ===== WHATSAPP MODAL TRIGGER ===== -->
+        <section class="mb-16 p-8 bg-gradient-to-r from-primary to-secondary rounded-xl text-white">
+            <h2 class="text-2xl font-bold mb-4">Get Started Today</h2>
+            <p class="mb-6">Click the WhatsApp button in the bottom-right corner to start your fitness journey!</p>
+            <button class="btn-primary bg-white text-primary hover:bg-gray-100">
+                Open WhatsApp Form
+            </button>
+        </section>
+    </main>
+    
+    <!-- ===== WHATSAPP MODAL ===== -->
+    <div id="whatsapp-modal">
+        <div class="whatsapp-modal-content p-8">
+            <!-- Close Button -->
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold">Let's Get You Started</h3>
+                <button id="whatsapp-close" class="text-2xl leading-none">&times;</button>
+            </div>
+            
+            <!-- Qualification Form -->
+            <form id="whatsapp-form" class="space-y-6">
+                
+                <!-- Goal -->
+                <div>
+                    <label class="block font-semibold mb-3">What's Your Fitness Goal?</label>
+                    <div class="space-y-2">
+                        <label class="flex items-center">
+                            <input type="radio" name="goal" value="Weight Loss" class="mr-3" required>
+                            <span>Weight Loss</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="goal" value="Muscle Gain" class="mr-3">
+                            <span>Muscle Gain</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="goal" value="General Fitness" class="mr-3">
+                            <span>General Fitness</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="goal" value="Athletic Performance" class="mr-3">
+                            <span>Athletic Performance</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Level -->
+                <div>
+                    <label class="block font-semibold mb-3">What's Your Fitness Level?</label>
+                    <div class="space-y-2">
+                        <label class="flex items-center">
+                            <input type="radio" name="level" value="Beginner" class="mr-3" required>
+                            <span>Beginner</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="level" value="Intermediate" class="mr-3">
+                            <span>Intermediate</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="level" value="Advanced" class="mr-3">
+                            <span>Advanced</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Location -->
+                <div>
+                    <label class="block font-semibold mb-3">Where Are You Located?</label>
+                    <select name="location" class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white" required>
+                        <option value="">Select location...</option>
+                        <option value="London">London</option>
+                        <option value="Manchester">Manchester</option>
+                        <option value="Birmingham">Birmingham</option>
+                        <option value="Online">Online</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                
+                <!-- Timeline -->
+                <div>
+                    <label class="block font-semibold mb-3">When Can You Start?</label>
+                    <div class="space-y-2">
+                        <label class="flex items-center">
+                            <input type="radio" name="timeline" value="Immediately" class="mr-3" required>
+                            <span>Immediately</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="timeline" value="This Week" class="mr-3">
+                            <span>This Week</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="timeline" value="Next Month" class="mr-3">
+                            <span>Next Month</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Submit Button -->
+                <button type="submit" class="btn-primary w-full justify-center">
+                    Send to WhatsApp
+                </button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- WhatsApp Trigger Button -->
+    <button id="whatsapp-trigger" title="Chat with us on WhatsApp">
+        💬
+    </button>
+    
+    <!-- ===== JAVASCRIPT ===== -->
+    <script>
+        // ===== DARK MODE TOGGLE =====
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+        const html = document.documentElement;
+        
+        // Check for saved dark mode preference
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            html.classList.add('dark');
+            updateDarkModeIcon();
+        }
+        
+        darkModeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            
+            if (html.classList.contains('dark')) {
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                localStorage.setItem('darkMode', 'disabled');
+            }
+            
+            updateDarkModeIcon();
+        });
+        
+        function updateDarkModeIcon() {
+            const lightIcon = darkModeToggle.querySelector('.light-icon');
+            const darkIcon = darkModeToggle.querySelector('.dark-icon');
+            
+            if (html.classList.contains('dark')) {
+                lightIcon.style.display = 'none';
+                darkIcon.style.display = 'inline';
+            } else {
+                lightIcon.style.display = 'inline';
+                darkIcon.style.display = 'none';
+            }
+        }
+        
+        // ===== SECTION HEADER UNDERLINE ANIMATION =====
+        const sectionHeaders = document.querySelectorAll('.section-header-underline[data-animate]');
+        
+        const animateOnScroll = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        };
+        
+        const observer = new IntersectionObserver(animateOnScroll, {
+            threshold: 0.5
+        });
+        
+        sectionHeaders.forEach(header => observer.observe(header));
+        
+        // ===== WHATSAPP MODAL FUNCTIONALITY =====
+        const whatsappTrigger = document.getElementById('whatsapp-trigger');
+        const whatsappModal = document.getElementById('whatsapp-modal');
+        const whatsappClose = document.getElementById('whatsapp-close');
+        const whatsappForm = document.getElementById('whatsapp-form');
+        
+        // Open modal
+        whatsappTrigger.addEventListener('click', () => {
+            whatsappModal.classList.add('active');
+        });
+        
+        // Close modal
+        const closeModal = () => {
+            whatsappModal.classList.add('modal-exit');
+            setTimeout(() => {
+                whatsappModal.classList.remove('active', 'modal-exit');
+            }, 300);
+        };
+        
+        whatsappClose.addEventListener('click', closeModal);
+        
+        // Close on background click
+        whatsappModal.addEventListener('click', (e) => {
+            if (e.target === whatsappModal) {
+                closeModal();
+            }
+        });
+        
+        // Form submission
+        whatsappForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Get form values
+            const goal = document.querySelector('input[name="goal"]:checked')?.value || '';
+            const level = document.querySelector('input[name="level"]:checked')?.value || '';
+            const location = document.querySelector('select[name="location"]').value || '';
+            const timeline = document.querySelector('input[name="timeline"]:checked')?.value || '';
+            
+            // Build WhatsApp message
+            const message = `Hi! I'm interested in starting my fitness journey.\n\nGoal: ${goal}\nFitness Level: ${level}\nLocation: ${location}\nTimeline: ${timeline}\n\nLooking forward to hearing from you!`;
+            
+            // Encode message for URL
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappURL = `https://wa.me/447940053102?text=${encodedMessage}`;
+            
+            // Open WhatsApp
+            window.open(whatsappURL, '_blank');
+            
+            // Close modal
+            closeModal();
+            
+            // Reset form
+            whatsappForm.reset();
+        });
+        
+        // Close modal on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && whatsappModal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
