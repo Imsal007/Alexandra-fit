@@ -23,8 +23,9 @@
     <title>Alexandra Fitness | Personal Trainer Stratford & Ilford</title>
     
     <!-- Preload critical fonts -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" as="style">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@700;800&display=swap" rel="stylesheet">
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -33,69 +34,305 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* Critical CSS - Inline for performance */
+        /* ======================================
+           DESIGN TOKENS - STRICT ADHERENCE
+           ====================================== */
         :root {
-            --primary: #FF6B6B;
-            --secondary: #4ECDC4;
-            --dark: #1A202C;
-            --light-gray: #F7FAFC;
+            /* Color Palette */
+            --color-primary: #FF6B6B;        /* Coral */
+            --color-secondary: #4ECDC4;      /* Turquoise */
+            --color-accent: #FFE66D;         /* Gold */
+            
+            /* Light Mode */
+            --color-light-bg: #F7FAFC;
+            --color-light-text: #1A202C;
+            
+            /* Dark Mode */
+            --color-dark-bg: #1A202C;
+            --color-dark-text: #F7FAFC;
+            
+            /* Shadows */
+            --shadow-subtle: 0 4px 6px rgba(0, 0, 0, 0.07);
+            --shadow-card: 0 10px 15px rgba(0, 0, 0, 0.08);
+            
+            /* Border Radius */
+            --radius-card: 12px;
+            --radius-button: 8px;
+            
+            /* Typography */
+            --font-heading: 'Poppins', sans-serif;
+            --font-body: 'Inter', sans-serif;
         }
         
+        /* ======================================
+           BASE TYPOGRAPHY & RESET
+           ====================================== */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
-        body {
-            font-family: 'Inter', sans-serif;
-            color: var(--dark);
-            line-height: 1.6;
+        * {
+            font-family: var(--font-body);
         }
         
         h1, h2, h3, h4, h5, h6 {
-            font-family: 'Poppins', sans-serif;
+            font-family: var(--font-heading);
             font-weight: 700;
         }
         
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 8px;
-            text-decoration: none;
-            display: inline-block;
-            font-weight: 600;
-            transition: background 0.3s ease;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
         }
         
-        .btn-primary:hover { background: #e55555; }
+        h2 {
+            font-size: 2rem;
+            font-weight: 800;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        
+        body {
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        /* ======================================
+           LIGHT MODE (Default)
+           ====================================== */
+        body {
+            background-color: var(--color-light-bg);
+            color: var(--color-light-text);
+        }
+        
+        /* ======================================
+           DARK MODE TOGGLE
+           ====================================== */
+        html.dark {
+            background-color: var(--color-dark-bg);
+            color: var(--color-dark-text);
+        }
+        
+        html.dark body {
+            background-color: var(--color-dark-bg);
+            color: var(--color-dark-text);
+        }
+        
+        html.dark .navbar {
+            background-color: #2D3748;
+            border-bottom-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        html.dark .nav-menu {
+            background-color: #2D3748;
+            border-bottom-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        html.dark .nav-menu a {
+            color: var(--color-dark-text);
+            border-bottom-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        html.dark .section.bg-gray-50 {
+            background-color: #2D3748 !important;
+        }
+        
+        html.dark .card-3d {
+            background: #2D3748;
+            color: var(--color-dark-text);
+        }
+        
+        html.dark .card-3d:hover {
+            box-shadow: 0 20px 25px rgba(0, 0, 0, 0.5);
+        }
+        
+        html.dark .exercise-card {
+            background: #2D3748;
+            color: var(--color-dark-text);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        html.dark .pricing-card {
+            background: #2D3748;
+            color: var(--color-dark-text);
+        }
+        
+        html.dark .calculator-result {
+            background: #2D3748;
+            color: var(--color-dark-text);
+        }
+        
+        html.dark .form-group input,
+        html.dark .form-group select,
+        html.dark .form-group textarea {
+            background: #1A202C;
+            color: var(--color-dark-text);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        html.dark .filter-btn {
+            border-color: rgba(255, 255, 255, 0.1);
+            color: var(--color-dark-text);
+            background: transparent;
+        }
+        
+        html.dark .filter-btn.active {
+            background: var(--color-primary);
+            color: white;
+            border-color: var(--color-primary);
+        }
+        
+        html.dark .search-box input {
+            background: #1A202C;
+            color: var(--color-dark-text);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        html.dark .btn-secondary {
+            color: var(--color-secondary);
+            border-color: var(--color-secondary);
+        }
+        
+        html.dark .btn-secondary:hover {
+            background: var(--color-secondary);
+            color: var(--color-dark-bg);
+        }
+        
+        html.dark .btn-ghost {
+            color: var(--color-dark-text);
+        }
+        
+        html.dark .btn-ghost:hover {
+            background: rgba(78, 205, 196, 0.1);
+            color: var(--color-secondary);
+        }
+        
+        /* ======================================
+           SECTION HEADER UNDERLINE ANIMATION
+           ====================================== */
+        .section-header-underline {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 12px;
+        }
+        
+        .section-header-underline::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--color-secondary), var(--color-accent));
+            transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border-radius: 2px;
+        }
+        
+        .section-header-underline.animate::after {
+            width: 100%;
+        }
+        
+        /* ======================================
+           CARD 3D HOVER EFFECT
+           ====================================== */
+        .card-3d {
+            background: white;
+            border-radius: var(--radius-card);
+            box-shadow: var(--shadow-subtle);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+                        box-shadow 0.3s ease;
+            will-change: transform;
+        }
+        
+        .card-3d:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-card);
+        }
+        
+        /* ======================================
+           BUTTON STYLES
+           ====================================== */
+        .btn-primary {
+            background: linear-gradient(135deg, var(--color-primary), #FF8A8A);
+            color: white;
+            padding: 12px 24px;
+            border-radius: var(--radius-button);
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: var(--shadow-subtle);
+            font-family: var(--font-body);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(255, 107, 107, 0.3);
+        }
+        
+        .btn-primary:active {
+            transform: translateY(0);
+        }
         
         .btn-secondary {
             background: transparent;
-            color: var(--primary);
-            border: 2px solid var(--primary);
+            color: var(--color-primary);
+            border: 2px solid var(--color-primary);
             padding: 10px 22px;
-            border-radius: 8px;
-            text-decoration: none;
-            display: inline-block;
-            font-weight: 600;
-            transition: all 0.3s ease;
+            border-radius: var(--radius-button);
+            font-weight: 500;
             cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: var(--font-body);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
         }
         
         .btn-secondary:hover {
-            background: var(--primary);
+            background: var(--color-primary);
             color: white;
+            transform: translateY(-2px);
         }
         
-        .smooth-scroll { scroll-behavior: smooth; }
+        .btn-ghost {
+            background: transparent;
+            color: var(--color-light-text);
+            border: none;
+            padding: 8px 16px;
+            border-radius: var(--radius-button);
+            font-weight: 400;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: var(--font-body);
+        }
         
+        .btn-ghost:hover {
+            background: rgba(78, 205, 196, 0.1);
+            color: var(--color-secondary);
+        }
+        
+        /* ======================================
+           NAVBAR STYLES
+           ====================================== */
         .navbar {
             background: white;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow-subtle);
             position: sticky;
             top: 0;
             z-index: 1000;
+            transition: background-color 0.3s ease;
         }
         
         .nav-menu {
@@ -107,16 +344,23 @@
             background: white;
             flex-direction: column;
             padding: 20px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow-subtle);
+            transition: background-color 0.3s ease;
         }
         
         .nav-menu.active { display: flex; }
         
         .nav-menu a {
-            padding: 10px 0;
-            color: var(--dark);
+            padding: 12px 0;
+            color: var(--color-light-text);
             text-decoration: none;
             border-bottom: 1px solid #e2e8f0;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+        
+        .nav-menu a:hover {
+            color: var(--color-primary);
         }
         
         .nav-menu a:last-child { border-bottom: none; }
@@ -131,7 +375,7 @@
         .hamburger span {
             width: 25px;
             height: 3px;
-            background: var(--dark);
+            background: var(--color-light-text);
             border-radius: 2px;
             transition: all 0.3s ease;
         }
@@ -164,27 +408,9 @@
             .hamburger { display: none !important; }
         }
         
-        .whatsapp-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #25D366;
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            text-decoration: none;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            transition: transform 0.3s ease;
-            z-index: 999;
-        }
-        
-        .whatsapp-btn:hover { transform: scale(1.1); }
-        
+        /* ======================================
+           HERO SECTION
+           ====================================== */
         .hero {
             background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1518611505868-d2b4fd09b592?w=1200&h=800&fit=crop');
             background-size: cover;
@@ -200,7 +426,6 @@
         }
         
         .hero h1 {
-            font-size: 2.5rem;
             margin-bottom: 15px;
             line-height: 1.2;
         }
@@ -223,20 +448,32 @@
             .hero h1 { font-size: 1.8rem; }
             .hero p { font-size: 1rem; }
             .hero-cta { flex-direction: column; }
-            .hero-cta a { width: 100%; text-align: center; }
+            .hero-cta button, .hero-cta a { width: 100%; text-align: center; }
         }
         
+        /* ======================================
+           SECTION STYLES
+           ====================================== */
         .section {
             padding: 80px 20px;
             max-width: 1200px;
             margin: 0 auto;
+            transition: background-color 0.3s ease;
+        }
+        
+        .section.bg-gray-50 {
+            background: #F7FAFC;
         }
         
         .section-title {
             font-size: 2rem;
             text-align: center;
             margin-bottom: 50px;
-            color: var(--dark);
+            color: var(--color-light-text);
+        }
+        
+        html.dark .section-title {
+            color: var(--color-dark-text);
         }
         
         .grid-2 {
@@ -245,42 +482,46 @@
             gap: 30px;
         }
         
-        .card {
-            background: white;
-            border-radius: 12px;
+        .card-3d {
             padding: 30px;
             text-align: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.12);
         }
         
         .card-icon {
             font-size: 2.5rem;
-            color: var(--primary);
+            color: var(--color-primary);
             margin-bottom: 15px;
         }
         
-        .card h3 {
+        .card-3d h3 {
             font-size: 1.3rem;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
         
-        .card p {
+        .card-3d p {
             color: #666;
             font-size: 0.95rem;
             line-height: 1.5;
         }
         
+        html.dark .card-3d p {
+            color: #aaa;
+        }
+        
+        /* ======================================
+           EXERCISE CARD STYLES
+           ====================================== */
         .exercise-card {
             background: white;
-            border-radius: 12px;
+            border-radius: var(--radius-card);
             padding: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            box-shadow: var(--shadow-subtle);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .exercise-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-card);
         }
         
         .exercise-card.hidden { display: none; }
@@ -295,6 +536,7 @@
         .exercise-card h4 {
             font-size: 1.1rem;
             margin-bottom: 8px;
+            font-family: var(--font-heading);
         }
         
         .difficulty-badge {
@@ -315,26 +557,47 @@
             margin-bottom: 12px;
         }
         
+        html.dark .exercise-info {
+            color: #aaa;
+        }
+        
         .exercise-cues {
             font-size: 0.9rem;
             line-height: 1.6;
             color: #555;
-            border-left: 3px solid var(--secondary);
+            border-left: 3px solid var(--color-secondary);
             padding-left: 12px;
         }
         
+        html.dark .exercise-cues {
+            color: #aaa;
+        }
+        
+        /* ======================================
+           PRICING CARD STYLES
+           ====================================== */
         .pricing-card {
             background: white;
-            border-radius: 12px;
+            border-radius: var(--radius-card);
             padding: 40px 30px;
             text-align: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            box-shadow: var(--shadow-subtle);
             position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-card);
         }
         
         .pricing-card.featured {
-            border: 3px solid var(--primary);
+            border: 3px solid var(--color-primary);
             transform: scale(1.05);
+        }
+        
+        .pricing-card.featured:hover {
+            transform: scale(1.05) translateY(-5px);
         }
         
         .pricing-badge {
@@ -342,7 +605,7 @@
             top: -15px;
             left: 50%;
             transform: translateX(-50%);
-            background: var(--primary);
+            background: var(--color-primary);
             color: white;
             padding: 6px 16px;
             border-radius: 20px;
@@ -358,7 +621,7 @@
         
         .price {
             font-size: 2rem;
-            color: var(--primary);
+            color: var(--color-primary);
             font-weight: 800;
             margin: 15px 0;
         }
@@ -375,13 +638,20 @@
             border-bottom: 1px solid #e2e8f0;
         }
         
+        html.dark .pricing-card li {
+            border-bottom-color: rgba(255, 255, 255, 0.1);
+        }
+        
         .pricing-card li:before {
             content: "✓ ";
-            color: var(--secondary);
+            color: var(--color-secondary);
             font-weight: bold;
             margin-right: 8px;
         }
         
+        /* ======================================
+           FORM STYLES
+           ====================================== */
         .form-group {
             margin-bottom: 20px;
         }
@@ -390,7 +660,11 @@
             display: block;
             margin-bottom: 8px;
             font-weight: 600;
-            color: var(--dark);
+            color: var(--color-light-text);
+        }
+        
+        html.dark .form-group label {
+            color: var(--color-dark-text);
         }
         
         .form-group input,
@@ -399,26 +673,33 @@
             width: 100%;
             padding: 12px;
             border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            font-family: 'Inter', sans-serif;
+            border-radius: var(--radius-button);
+            font-family: var(--font-body);
             font-size: 1rem;
+            background: white;
+            color: var(--color-light-text);
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
         }
         
         .form-group input:focus,
         .form-group select:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: var(--primary);
+            border-color: var(--color-primary);
             box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
         }
         
+        /* ======================================
+           CALCULATOR RESULT STYLES
+           ====================================== */
         .calculator-result {
-            background: var(--light-gray);
+            background: var(--color-light-bg);
             padding: 20px;
-            border-radius: 8px;
+            border-radius: var(--radius-button);
             margin-top: 20px;
             text-align: center;
             display: none;
+            transition: background-color 0.3s ease;
         }
         
         .calculator-result.show { display: block; }
@@ -440,13 +721,13 @@
             font-size: 3rem;
             font-weight: 800;
             margin: 20px 0;
-            color: var(--primary);
+            color: var(--color-primary);
         }
         
         .bmi-category {
             font-size: 1.2rem;
             padding: 12px 24px;
-            border-radius: 8px;
+            border-radius: var(--radius-button);
             display: inline-block;
             font-weight: 600;
             margin-top: 15px;
@@ -457,6 +738,9 @@
         .bmi-overweight { background: #fff3cd; color: #664d03; }
         .bmi-obese { background: #f8d7da; color: #842029; }
         
+        /* ======================================
+           FILTER & SEARCH STYLES
+           ====================================== */
         .filter-buttons {
             display: flex;
             justify-content: center;
@@ -469,7 +753,7 @@
             padding: 8px 16px;
             border: 2px solid #e2e8f0;
             background: white;
-            color: var(--dark);
+            color: var(--color-light-text);
             border-radius: 20px;
             cursor: pointer;
             font-weight: 600;
@@ -477,9 +761,9 @@
         }
         
         .filter-btn.active {
-            background: var(--primary);
+            background: var(--color-primary);
             color: white;
-            border-color: var(--primary);
+            border-color: var(--color-primary);
         }
         
         .search-box {
@@ -493,10 +777,21 @@
             width: 100%;
             padding: 12px;
             border: 2px solid #e2e8f0;
-            border-radius: 8px;
+            border-radius: var(--radius-button);
             font-size: 1rem;
+            background: white;
+            color: var(--color-light-text);
+            transition: border-color 0.2s ease;
         }
         
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+        }
+        
+        /* ======================================
+           ABOUT SECTION STYLES
+           ====================================== */
         .about-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -505,9 +800,9 @@
         }
         
         .about-image {
-            border-radius: 12px;
+            border-radius: var(--radius-card);
             overflow: hidden;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow-subtle);
         }
         
         .about-image img {
@@ -527,6 +822,10 @@
             color: #555;
         }
         
+        html.dark .about-text p {
+            color: #aaa;
+        }
+        
         .stats {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -540,7 +839,7 @@
         
         .stat-number {
             font-size: 2rem;
-            color: var(--primary);
+            color: var(--color-primary);
             font-weight: 800;
         }
         
@@ -550,11 +849,15 @@
             margin-top: 5px;
         }
         
+        html.dark .stat-label {
+            color: #aaa;
+        }
+        
         .map-container {
             margin-top: 30px;
-            border-radius: 12px;
+            border-radius: var(--radius-card);
             overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            box-shadow: var(--shadow-subtle);
             height: 300px;
         }
         
@@ -564,8 +867,111 @@
             border: none;
         }
         
+        /* ======================================
+           WHATSAPP MODAL STYLES
+           ====================================== */
+        #whatsapp-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            z-index: 9998;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        #whatsapp-modal.active {
+            display: flex;
+        }
+        
+        .whatsapp-modal-content {
+            background: white;
+            border-radius: var(--radius-card);
+            max-width: 500px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
+            animation: slideUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        html.dark .whatsapp-modal-content {
+            background: #2D3748;
+            color: var(--color-dark-text);
+        }
+        
+        #whatsapp-trigger {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: #25D366;
+            color: white;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            transition: all 0.3s ease;
+            z-index: 9997;
+        }
+        
+        #whatsapp-trigger:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(37, 211, 102, 0.6);
+        }
+        
+        #whatsapp-trigger:active {
+            transform: scale(0.95);
+        }
+        
+        /* ======================================
+           ANIMATIONS
+           ====================================== */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideOut {
+            from {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+        }
+        
+        .modal-exit .whatsapp-modal-content {
+            animation: slideOut 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        /* ======================================
+           FOOTER STYLES
+           ====================================== */
         .footer {
-            background: var(--dark);
+            background: var(--color-dark-bg);
             color: white;
             padding: 50px 20px 20px;
         }
@@ -582,6 +988,7 @@
         .footer-section h4 {
             margin-bottom: 15px;
             font-size: 1.1rem;
+            font-family: var(--font-heading);
         }
         
         .footer-section a {
@@ -592,7 +999,7 @@
             transition: color 0.3s ease;
         }
         
-        .footer-section a:hover { color: var(--primary); }
+        .footer-section a:hover { color: var(--color-primary); }
         
         .social-icons {
             display: flex;
@@ -609,10 +1016,11 @@
             background: rgba(255,255,255,0.1);
             border-radius: 50%;
             margin: 0;
+            transition: background-color 0.3s ease;
         }
         
         .social-icons a:hover {
-            background: var(--primary);
+            background: var(--color-primary);
             color: white;
         }
         
@@ -632,6 +1040,8 @@
         }
         
         img { max-width: 100%; height: auto; }
+        
+        .smooth-scroll { scroll-behavior: smooth; }
     </style>
 </head>
 <body class="smooth-scroll">
@@ -639,7 +1049,7 @@
     <!-- Navigation -->
     <nav class="navbar">
         <div class="flex justify-between items-center max-w-6xl mx-auto px-6 py-4">
-            <div class="flex items-center gap-2 text-2xl font-bold" style="color: var(--primary);">
+            <div class="flex items-center gap-2 text-2xl font-bold" style="color: var(--color-primary);">
                 <i class="fas fa-dumbbell"></i>
                 <span>Alexandra Fitness</span>
             </div>
@@ -657,6 +1067,11 @@
                 <a href="#pricing">Pricing</a>
                 <a href="#about">About</a>
                 <a href="#contact">Contact</a>
+                <!-- Dark Mode Toggle -->
+                <button id="dark-mode-toggle" class="btn-ghost" style="padding: 4px 12px; font-size: 1.2rem;">
+                    <span class="light-icon">🌙</span>
+                    <span class="dark-icon" style="display: none;">☀️</span>
+                </button>
             </div>
         </div>
     </nav>
@@ -677,41 +1092,38 @@
         </div>
     </section>
 
-    <!-- WhatsApp Button -->
-    <a href="https://wa.me/447000000000?text=Hi%20Alexandra%2C%20I%27d%20like%20to%20book%20a%20free%20consultation" class="whatsapp-btn" target="_blank" title="Chat on WhatsApp">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-
     <!-- Services Section -->
     <section id="services" class="section bg-gray-50">
-        <h2 class="section-title">Our Services</h2>
+        <h2 class="section-title">
+            <span class="section-header-underline" data-animate="true">Our Services</span>
+        </h2>
         <div class="grid-2">
-            <div class="card">
+            <div class="card-3d p-6">
                 <div class="card-icon"><i class="fas fa-person-hiking"></i></div>
                 <h3>1:1 Personal Training</h3>
                 <p>Expert coaching at Pure Gym Stratford with personalized workout plans tailored to your goals.</p>
             </div>
-            <div class="card">
+            <div class="card-3d p-6">
                 <div class="card-icon"><i class="fas fa-video"></i></div>
                 <h3>Online Live Coaching</h3>
                 <p>Train from anywhere with real-time guidance and form correction via video sessions.</p>
             </div>
-            <div class="card">
+            <div class="card-3d p-6">
                 <div class="card-icon"><i class="fas fa-fire"></i></div>
                 <h3>Custom Workout Programs</h3>
                 <p>Tailored 4-12 week programs designed specifically for your fitness level and objectives.</p>
             </div>
-            <div class="card">
+            <div class="card-3d p-6">
                 <div class="card-icon"><i class="fas fa-apple-alt"></i></div>
                 <h3>Nutrition & Meal Planning</h3>
                 <p>Science-backed nutrition plans to fuel your workouts and achieve sustainable results.</p>
             </div>
-            <div class="card">
+            <div class="card-3d p-6">
                 <div class="card-icon"><i class="fas fa-chart-line"></i></div>
                 <h3>Weight Loss Transformation</h3>
                 <p>Comprehensive programs combining strength training and nutrition for lasting transformation.</p>
             </div>
-            <div class="card">
+            <div class="card-3d p-6">
                 <div class="card-icon"><i class="fas fa-bolt"></i></div>
                 <h3>Strength & Toning</h3>
                 <p>Build lean muscle, increase strength, and sculpt your physique with proven methods.</p>
@@ -721,12 +1133,14 @@
 
     <!-- Interactive Tools Section -->
     <section id="tools" class="section">
-        <h2 class="section-title">Fitness Calculators</h2>
+        <h2 class="section-title">
+            <span class="section-header-underline" data-animate="true">Fitness Calculators</span>
+        </h2>
         
         <div class="grid-2">
             <!-- Calorie Calculator -->
-            <div class="card">
-                <h3><i class="fas fa-calculator" style="color: var(--primary);"></i> Calorie Calculator</h3>
+            <div class="card-3d p-6">
+                <h3><i class="fas fa-calculator" style="color: var(--color-primary);"></i> Calorie Calculator</h3>
                 <form id="calorieForm" onsubmit="calculateCalories(event)">
                     <div class="form-group">
                         <label>Age (years)</label>
@@ -798,8 +1212,8 @@
             </div>
 
             <!-- BMI Calculator -->
-            <div class="card">
-                <h3><i class="fas fa-body" style="color: var(--primary);"></i> BMI Calculator</h3>
+            <div class="card-3d p-6">
+                <h3><i class="fas fa-body" style="color: var(--color-primary);"></i> BMI Calculator</h3>
                 <form id="bmiForm" onsubmit="calculateBMI(event)">
                     <div class="form-group">
                         <label>Weight (kg)</label>
@@ -825,7 +1239,9 @@
 
     <!-- Exercise Library Section -->
     <section id="exercises" class="section bg-gray-50">
-        <h2 class="section-title">Exercise Library</h2>
+        <h2 class="section-title">
+            <span class="section-header-underline" data-animate="true">Exercise Library</span>
+        </h2>
         
         <div class="search-box">
             <input type="text" id="exerciseSearch" placeholder="Search exercises..." oninput="filterExercises()">
@@ -845,7 +1261,9 @@
 
     <!-- Pricing Section -->
     <section id="pricing" class="section">
-        <h2 class="section-title">Pricing Plans</h2>
+        <h2 class="section-title">
+            <span class="section-header-underline" data-animate="true">Pricing Plans</span>
+        </h2>
         <p style="text-align: center; color: #666; margin-bottom: 40px; font-size: 1.05rem;">
             <strong>First Session FREE</strong> - Start your transformation today!
         </p>
@@ -892,7 +1310,9 @@
 
     <!-- About Section -->
     <section id="about" class="section bg-gray-50">
-        <h2 class="section-title">About Alexandra</h2>
+        <h2 class="section-title">
+            <span class="section-header-underline" data-animate="true">About Alexandra</span>
+        </h2>
         <div class="about-content">
             <div class="about-image">
                 <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=500&fit=crop" alt="Alexandra - Personal Trainer">
@@ -966,7 +1386,9 @@
 
     <!-- Contact Section -->
     <section id="contact" class="section bg-gray-50">
-        <h2 class="section-title">Get Started Today</h2>
+        <h2 class="section-title">
+            <span class="section-header-underline" data-animate="true">Get Started Today</span>
+        </h2>
         <div style="max-width: 600px; margin: 0 auto;">
             <p style="text-align: center; color: #666; margin-bottom: 30px;">
                 Book your free consultation and let's start your transformation journey!
@@ -1007,7 +1429,7 @@
                 
                 <button type="submit" class="btn-primary w-full" style="margin-bottom: 15px;">Send Message</button>
                 <p style="text-align: center; color: #666; font-size: 0.9rem;">
-                    Or connect directly via <a href="https://wa.me/447000000000?text=Hi%20Alexandra%2C%20I%27d%20like%20to%20book%20a%20free%20consultation" style="color: var(--primary); font-weight: 600;" target="_blank">WhatsApp</a>
+                    Or use the <button type="button" onclick="openWhatsAppModal()" class="btn-ghost" style="padding: 0; text-decoration: underline; font-weight: 600;">WhatsApp form</button> in the bottom-right corner
                 </p>
             </form>
         </div>
@@ -1022,7 +1444,7 @@
                 <div class="social-icons">
                     <a href="https://www.instagram.com/alexandrafitness" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
                     <a href="https://www.facebook.com/alexandrafitness" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
-                    <a href="https://wa.me/447000000000" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://wa.me/447940053102" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
                 </div>
             </div>
             
@@ -1047,7 +1469,7 @@
             <div class="footer-section">
                 <h4>Contact</h4>
                 <a href="tel:+447000000000">+44 700 000 0000</a>
-                <a href="https://wa.me/447000000000" target="_blank">WhatsApp</a>
+                <a href="https://wa.me/447940053102" target="_blank">WhatsApp</a>
                 <p style="color: #aaa; font-size: 0.9rem; margin-top: 10px;">Pure Gym Stratford<br>Stratford, London E15</p>
             </div>
         </div>
@@ -1058,9 +1480,224 @@
         </div>
     </footer>
 
+    <!-- WhatsApp Modal -->
+    <div id="whatsapp-modal">
+        <div class="whatsapp-modal-content p-8">
+            <!-- Close Button -->
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold">Let's Get You Started</h3>
+                <button id="whatsapp-close" class="text-2xl leading-none" style="background: none; border: none; cursor: pointer; padding: 0;">&times;</button>
+            </div>
+            
+            <!-- Qualification Form -->
+            <form id="whatsapp-form" class="space-y-6">
+                
+                <!-- Goal -->
+                <div>
+                    <label class="block font-semibold mb-3">What's Your Fitness Goal?</label>
+                    <div class="space-y-2">
+                        <label class="flex items-center" style="cursor: pointer;">
+                            <input type="radio" name="goal" value="Weight Loss" class="mr-3" required>
+                            <span>Weight Loss</span>
+                        </label>
+                        <label class="flex items-center" style="cursor: pointer;">
+                            <input type="radio" name="goal" value="Muscle Gain" class="mr-3">
+                            <span>Muscle Gain</span>
+                        </label>
+                        <label class="flex items-center" style="cursor: pointer;">
+                            <input type="radio" name="goal" value="General Fitness" class="mr-3">
+                            <span>General Fitness</span>
+                        </label>
+                        <label class="flex items-center" style="cursor: pointer;">
+                            <input type="radio" name="goal" value="Athletic Performance" class="mr-3">
+                            <span>Athletic Performance</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Level -->
+                <div>
+                    <label class="block font-semibold mb-3">What's Your Fitness Level?</label>
+                    <div class="space-y-2">
+                        <label class="flex items-center" style="cursor: pointer;">
+                            <input type="radio" name="level" value="Beginner" class="mr-3" required>
+                            <span>Beginner</span>
+                        </label>
+                        <label class="flex items-center" style="cursor: pointer;">
+                            <input type="radio" name="level" value="Intermediate" class="mr-3">
+                            <span>Intermediate</span>
+                        </label>
+                        <label class="flex items-center" style="cursor: pointer;">
+                            <input type="radio" name="level" value="Advanced" class="mr-3">
+                            <span>Advanced</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Location -->
+                <div>
+                    <label class="block font-semibold mb-3">Where Are You Located?</label>
+                    <select name="location" class="w-full p-3 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-white form-group" style="margin: 0;" required>
+                        <option value="">Select location...</option>
+                        <option value="London">London</option>
+                        <option value="Manchester">Manchester</option>
+                        <option value="Birmingham">Birmingham</option>
+                        <option value="Online">Online</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                
+                <!-- Timeline -->
+                <div>
+                    <label class="block font-semibold mb-3">When Can You Start?</label>
+                    <div class="space-y-2">
+                        <label class="flex items-center" style="cursor: pointer;">
+                            <input type="radio" name="timeline" value="Immediately" class="mr-3" required>
+                            <span>Immediately</span>
+                        </label>
+                        <label class="flex items-center" style="cursor: pointer;">
+                            <input type="radio" name="timeline" value="This Week" class="mr-3">
+                            <span>This Week</span>
+                        </label>
+                        <label class="flex items-center" style="cursor: pointer;">
+                            <input type="radio" name="timeline" value="Next Month" class="mr-3">
+                            <span>Next Month</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Submit Button -->
+                <button type="submit" class="btn-primary w-full justify-center" style="width: 100%;">
+                    Send to WhatsApp
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- WhatsApp Trigger Button -->
+    <button id="whatsapp-trigger" title="Chat with us on WhatsApp">
+        💬
+    </button>
+
     <!-- JavaScript -->
     <script>
-        // Hamburger Menu Toggle
+        // ===== DARK MODE TOGGLE =====
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+        const html = document.documentElement;
+        
+        // Check for saved dark mode preference
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            html.classList.add('dark');
+            updateDarkModeIcon();
+        }
+        
+        darkModeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            
+            if (html.classList.contains('dark')) {
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                localStorage.setItem('darkMode', 'disabled');
+            }
+            
+            updateDarkModeIcon();
+        });
+        
+        function updateDarkModeIcon() {
+            const lightIcon = darkModeToggle.querySelector('.light-icon');
+            const darkIcon = darkModeToggle.querySelector('.dark-icon');
+            
+            if (html.classList.contains('dark')) {
+                lightIcon.style.display = 'none';
+                darkIcon.style.display = 'inline';
+            } else {
+                lightIcon.style.display = 'inline';
+                darkIcon.style.display = 'none';
+            }
+        }
+
+        // ===== SECTION HEADER UNDERLINE ANIMATION =====
+        const sectionHeaders = document.querySelectorAll('.section-header-underline[data-animate]');
+        
+        const animateOnScroll = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        };
+        
+        const observer = new IntersectionObserver(animateOnScroll, {
+            threshold: 0.5
+        });
+        
+        sectionHeaders.forEach(header => observer.observe(header));
+
+        // ===== WHATSAPP MODAL FUNCTIONALITY =====
+        const whatsappTrigger = document.getElementById('whatsapp-trigger');
+        const whatsappModal = document.getElementById('whatsapp-modal');
+        const whatsappClose = document.getElementById('whatsapp-close');
+        const whatsappForm = document.getElementById('whatsapp-form');
+        
+        // Open modal
+        function openWhatsAppModal() {
+            whatsappModal.classList.add('active');
+        }
+        
+        whatsappTrigger.addEventListener('click', openWhatsAppModal);
+        
+        // Close modal
+        const closeModal = () => {
+            whatsappModal.classList.add('modal-exit');
+            setTimeout(() => {
+                whatsappModal.classList.remove('active', 'modal-exit');
+            }, 300);
+        };
+        
+        whatsappClose.addEventListener('click', closeModal);
+        
+        // Close on background click
+        whatsappModal.addEventListener('click', (e) => {
+            if (e.target === whatsappModal) {
+                closeModal();
+            }
+        });
+        
+        // Form submission
+        whatsappForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Get form values
+            const goal = document.querySelector('input[name="goal"]:checked')?.value || '';
+            const level = document.querySelector('input[name="level"]:checked')?.value || '';
+            const location = document.querySelector('select[name="location"]').value || '';
+            const timeline = document.querySelector('input[name="timeline"]:checked')?.value || '';
+            
+            // Build WhatsApp message
+            const message = `Hi! I'm interested in starting my fitness journey with Alexandra.\n\nGoal: ${goal}\nFitness Level: ${level}\nLocation: ${location}\nTimeline: ${timeline}\n\nLooking forward to hearing from you!`;
+            
+            // Encode message for URL
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappURL = `https://wa.me/447940053102?text=${encodedMessage}`;
+            
+            // Open WhatsApp
+            window.open(whatsappURL, '_blank');
+            
+            // Close modal
+            closeModal();
+            
+            // Reset form
+            whatsappForm.reset();
+        });
+        
+        // Close modal on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && whatsappModal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+
+        // ===== HAMBURGER MENU TOGGLE =====
         const hamburger = document.getElementById('hamburger');
         const navMenu = document.getElementById('navMenu');
         
@@ -1077,7 +1714,7 @@
             });
         });
 
-        // Exercise Data
+        // ===== EXERCISE DATA =====
         const exercises = [
             {
                 name: "Squats",
@@ -1137,7 +1774,7 @@
             }
         ];
 
-        // Generate Exercise Cards
+        // ===== GENERATE EXERCISE CARDS =====
         function renderExercises(filter = 'all', search = '') {
             const exerciseList = document.getElementById('exerciseList');
             exerciseList.innerHTML = '';
@@ -1174,7 +1811,7 @@
             });
         }
 
-        // Filter Exercises by Category
+        // ===== FILTER EXERCISES BY CATEGORY =====
         let currentFilter = 'all';
         function filterByCategory(category) {
             currentFilter = category;
@@ -1183,7 +1820,7 @@
             renderExercises(category, document.getElementById('exerciseSearch').value);
         }
 
-        // Filter Exercises by Search
+        // ===== FILTER EXERCISES BY SEARCH =====
         function filterExercises() {
             const search = document.getElementById('exerciseSearch').value;
             renderExercises(currentFilter, search);
@@ -1192,7 +1829,7 @@
         // Initialize exercises on load
         renderExercises();
 
-        // Calorie Calculator (Mifflin-St Jeor Equation)
+        // ===== CALORIE CALCULATOR (Mifflin-St Jeor Equation) =====
         function calculateCalories(e) {
             e.preventDefault();
             
@@ -1228,7 +1865,7 @@
             document.getElementById('calorieResult').classList.add('show');
         }
 
-        // BMI Calculator
+        // ===== BMI CALCULATOR =====
         function calculateBMI(e) {
             e.preventDefault();
             
@@ -1262,13 +1899,13 @@
             document.getElementById('bmiResult').classList.add('show');
         }
 
-        // Book Service Function
+        // ===== BOOK SERVICE FUNCTION =====
         function bookService(service) {
             const message = `Hi Alexandra, I'm interested in the ${service}. Can we discuss this further?`;
-            window.open(`https://wa.me/447000000000?text=${encodeURIComponent(message)}`, '_blank');
+            window.open(`https://wa.me/447940053102?text=${encodeURIComponent(message)}`, '_blank');
         }
 
-        // Handle Form Submit
+        // ===== HANDLE FORM SUBMIT =====
         function handleFormSubmit(e) {
             e.preventDefault();
             
@@ -1280,9 +1917,9 @@
             
             const whatsappMessage = `Hi Alexandra! 👋\n\nI'd like to book a consultation.\n\n📋 Details:\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nInterested in: ${service}\nMessage: ${message}`;
             
-            window.open(`https://wa.me/447000000000?text=${encodeURIComponent(whatsappMessage)}`, '_blank');
+            window.open(`https://wa.me/447940053102?text=${encodeURIComponent(whatsappMessage)}`, '_blank');
             
-            // Optional: Clear form
+            // Reset form
             document.getElementById('contactForm').reset();
         }
 
