@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alexandra Fitness Blog | Workout Tips & Nutrition Advice</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --color-primary: #FF6B6B; --color-primary-dark: #E55555; --color-secondary: #4ECDC4; --bg-primary: #0F172A; --bg-secondary: #1E293B; --text-primary: #F8FAFC; --text-secondary: #CBD5E1; --text-tertiary: #94A3B8; --border-color: rgba(255, 255, 255, 0.1); --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5); --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px; --font-heading: 'Poppins', sans-serif; --font-body: 'Inter', sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--font-body); background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%); color: var(--text-primary); line-height: 1.6; min-height: 100vh; }
+        h1, h2, h3 { font-family: var(--font-heading); font-weight: 700; }
+        .gradient-text { background: linear-gradient(135deg, var(--color-primary), var(--color-secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .glass-card { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid var(--border-color); border-radius: var(--radius-md); transition: all 0.3s; }
+        .glass-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+        .navbar { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-color); position: sticky; top: 0; z-index: 1000; }
+        .nav-menu { display: none; position: absolute; top: 70px; left: 0; right: 0; background: rgba(15, 23, 42, 0.95); flex-direction: column; padding: 20px; border-bottom: 1px solid var(--border-color); }
+        .nav-menu.active { display: flex; }
+        .nav-menu a { padding: 12px 0; color: var(--text-secondary); text-decoration: none; border-bottom: 1px solid var(--border-color); }
+        .nav-menu a:hover { color: var(--color-primary); }
+        .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; }
+        .hamburger span { width: 25px; height: 3px; background: var(--text-primary); border-radius: 2px; }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(8px, 8px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
+        @media (min-width: 768px) {
+            .nav-menu { display: flex !important; position: static; flex-direction: row; gap: 30px; padding: 0; background: transparent; border: none; }
+            .nav-menu a { border: none; padding: 0; }
+            .hamburger { display: none !important; }
+            .dropdown { position: relative; }
+            .dropdown-btn { background: transparent; color: var(--text-secondary); border: none; font-size: 1rem; cursor: pointer; display: flex; align-items: center; gap: 5px; }
+            .dropdown-btn:hover { color: var(--color-primary); }
+            .dropdown-content { display: none; position: absolute; top: 100%; left: 0; background: rgba(15, 23, 42, 0.95); min-width: 180px; box-shadow: var(--shadow-lg); border-radius: var(--radius-sm); border: 1px solid var(--border-color); z-index: 1001; padding: 10px 0; }
+            .dropdown:hover .dropdown-content { display: block; }
+            .dropdown-content a { display: block; padding: 12px 20px; color: var(--text-secondary); border-bottom: 1px solid var(--border-color); }
+            .dropdown-content a:last-child { border-bottom: none; }
+            .dropdown-content a:hover { background: rgba(255, 107, 107, 0.1); color: var(--color-primary); }
+        }
+        .dropdown { width: 100%; }
+        .dropdown-btn { background: transparent; color: var(--text-secondary); border: none; font-size: 1rem; cursor: pointer; display: flex; justify-content: space-between; width: 100%; padding: 12px 0; border-bottom: 1px solid var(--border-color); }
+        .dropdown-content { display: none; background: rgba(15, 23, 42, 0.5); padding-left: 20px; }
+        .dropdown-content.show { display: block; }
+        .dropdown-content a { display: block; padding: 10px 0; color: var(--text-tertiary); text-decoration: none; border-bottom: 1px solid var(--border-color); }
+        .section { padding: 100px 20px; max-width: 1200px; margin: 0 auto; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .footer { background: rgba(15, 23, 42, 0.95); border-top: 1px solid var(--border-color); padding: 60px 20px 20px; margin-top: 80px; }
+        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto; }
+        .footer-section h4 { color: var(--text-primary); margin-bottom: 20px; }
+        .footer-section a { display: block; color: var(--text-tertiary); text-decoration: none; margin-bottom: 10px; }
+        .footer-section a:hover { color: var(--color-primary); }
+        .social-icons { display: flex; gap: 15px; margin-top: 20px; }
+        .social-icons a { display: inline-flex; width: 40px; height: 40px; background: rgba(255, 255, 255, 0.1); border-radius: 50%; align-items: center; justify-content: center; color: var(--text-primary); }
+        .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; z-index: 999; text-decoration: none; }
+        .blog-hero { background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(30, 41, 59, 0.85)), url('https://images.unsplash.com/photo-1518611505868-d2b4fd09b592?w=1200&h=800'); background-size: cover; padding: 120px 20px; text-align: center; min-height: 400px; display: flex; flex-direction: column; justify-content: center; }
+        .blog-card { overflow: hidden; }
+        .blog-card img { width: 100%; height: 200px; object-fit: cover; }
+        .blog-card-content { padding: 24px; }
+        .read-more { color: var(--color-primary); text-decoration: none; font-weight: 600; }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="flex justify-between items-center max-w-6xl mx-auto px-6 py-4">
+            <div class="flex items-center gap-2 text-2xl font-bold gradient-text"><i class="fas fa-dumbbell"></i><span>Alexandra Fitness</span></div>
+            <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+            <div class="nav-menu" id="navMenu">
+                <a href="index.html#services">Services</a>
+                <a href="index.html#tools">Tools</a>
+                <a href="index.html#exercises">Exercises</a>
+                <a href="index.html#pricing">Pricing</a>
+                <div class="dropdown"><button class="dropdown-btn">Locations <i class="fas fa-chevron-down"></i></button><div class="dropdown-content"><a href="locations/stratford.html">Stratford</a><a href="locations/ilford.html">Ilford</a><a href="locations/forestgate.html">Forest Gate</a><a href="locations/uptonpark.html">Upton Park</a><a href="locations/leyton.html">Leyton</a></div></div>
+                <a href="blog.html">Blog</a>
+                <a href="index.html#about">About</a>
+                <a href="index.html#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+    <section class="blog-hero"><h1 class="gradient-text">Fitness Blog</h1><p>Expert tips, workout guides, and nutrition advice</p></section>
+    <section class="section"><h2 class="section-title gradient-text">Latest Articles</h2><div class="grid-3">
+        <article class="glass-card blog-card"><img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&h=250" alt="Workout"><div class="blog-card-content"><p style="color:var(--color-primary)">January 2026</p><h3>5 Essential Exercises Every Woman Should Master</h3><p style="color:var(--text-secondary)">Discover fundamental movements that build strength and confidence.</p><a href="#" class="read-more">Read More</a></div></article>
+        <article class="glass-card blog-card"><img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=400&h=250" alt="Nutrition"><div class="blog-card-content"><p style="color:var(--color-primary)">January 2026</p><h3>Nutrition 101: Fueling Your Workouts Properly</h3><p style="color:var(--text-secondary)">Learn what to eat before and after workouts for best results.</p><a href="#" class="read-more">Read More</a></div></article>
+        <article class="glass-card blog-card"><img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=250" alt="Home workout"><div class="blog-card-content"><p style="color:var(--color-primary)">December 2025</p><h3>Effective Home Workouts: No Equipment Needed</h3><p style="color:var(--text-secondary)">Stay fit from home with these bodyweight exercises.</p><a href="#" class="read-more">Read More</a></div></article>
+        <article class="glass-card blog-card"><img src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=400&h=250" alt="Strength training"><div class="blog-card-content"><p style="color:var(--color-primary)">December 2025</p><h3>Why Women Should Embrace Strength Training</h3><p style="color:var(--text-secondary)">Break myths about lifting weights and transform your body.</p><a href="#" class="read-more">Read More</a></div></article>
+        <article class="glass-card blog-card"><img src="https://images.unsplash.com/photo-1518310383802-640c2de311b2?w=400&h=250" alt="Motivation"><div class="blog-card-content"><p style="color:var(--color-primary)">November 2025</p><h3>Staying Motivated: Building Consistent Habits</h3><p style="color:var(--text-secondary)">Practical strategies to maintain your fitness routine.</p><a href="#" class="read-more">Read More</a></div></article>
+        <article class="glass-card blog-card"><img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9850b?w=400&h=250" alt="Personal trainer"><div class="blog-card-content"><p style="color:var(--color-primary)">November 2025</p><h3>The Benefits of Working with a Personal Trainer</h3><p style="color:var(--text-secondary)">How personalized coaching accelerates your progress.</p><a href="#" class="read-more">Read More</a></div></article>
+    </div></section>
+    <footer class="footer"><div class="footer-content">
+        <div class="footer-section"><h4 class="gradient-text">Alexandra Fitness</h4><p style="color:var(--text-secondary)">Expert personal training in Stratford, Ilford & East London.</p><div class="social-icons"><a href="https://www.instagram.com/alexandraapopaa/" target="_blank"><i class="fab fa-instagram"></i></a><a href="https://www.puregym.com/gyms/london-stratford/personal-trainers/alexandra-popa/" target="_blank"><i class="fas fa-dumbbell"></i></a><a href="https://wa.me/447940053102" target="_blank"><i class="fab fa-whatsapp"></i></a></div></div>
+        <div class="footer-section"><h4>Quick Links</h4><a href="index.html#services">Services</a><a href="index.html#tools">Tools</a><a href="index.html#exercises">Exercises</a><a href="index.html#pricing">Pricing</a><a href="blog.html">Blog</a><a href="index.html#about">About</a><a href="index.html#contact">Contact</a></div>
+        <div class="footer-section"><h4>Training Locations</h4><a href="locations/stratford.html">Stratford</a><a href="locations/ilford.html">Ilford</a><a href="locations/forestgate.html">Forest Gate</a><a href="locations/uptonpark.html">Upton Park</a><a href="locations/leyton.html">Leyton</a></div>
+        <div class="footer-section"><h4>Services</h4><a href="index.html#services">Personal Training</a><a href="index.html#services">Online Coaching</a><a href="index.html#services">Nutrition Planning</a><a href="index.html#services">Meal Plans</a></div>
+        <div class="footer-section"><h4>Contact</h4><a href="tel:+447940053102">+44 7940 053102</a><a href="https://wa.me/447940053102" target="_blank">WhatsApp</a></div>
+    </div><div style="text-align:center;padding-top:40px;margin-top:40px;border-top:1px solid var(--border-color);color:var(--text-tertiary)"><p>© 2026 Alexandra Fitness. All rights reserved.</p></div></footer>
+    <a href="https://wa.me/447940053102" target="_blank" class="whatsapp-float"><i class="fab fa-whatsapp"></i></a>
+    <script>const hamburger=document.getElementById('hamburger'),navMenu=document.getElementById('navMenu');hamburger.addEventListener('click',()=>{hamburger.classList.toggle('active');navMenu.classList.toggle('active')});document.querySelectorAll('.nav-menu>a').forEach(link=>{link.addEventListener('click',()=>{hamburger.classList.remove('active');navMenu.classList.remove('active')})});const dropdownBtn=document.querySelector('.dropdown-btn'),dropdownContent=document.querySelector('.dropdown-content');if(dropdownBtn&&dropdownContent){dropdownBtn.addEventListener('click',(e)=>{e.preventDefault();if(window.innerWidth<768){dropdownContent.classList.toggle('show')}})}</script>
+</body>
+</html>
