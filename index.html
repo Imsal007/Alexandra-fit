@@ -183,6 +183,7 @@
             flex-direction: column;
             cursor: pointer;
             gap: 5px;
+            padding: 5px;
         }
         
         .hamburger span {
@@ -203,6 +204,13 @@
         
         .hamburger.active span:nth-child(3) {
             transform: rotate(-45deg) translate(7px, -7px);
+        }
+        
+        /* Mobile menu trigger - show hamburger on screens below 768px */
+        @media (max-width: 767px) {
+            .hamburger {
+                display: flex !important;
+            }
         }
         
         @media (min-width: 768px) {
@@ -1035,17 +1043,17 @@
 
     <!-- Navigation -->
     <nav class="navbar">
-        <div class="flex justify-between items-center max-w-6xl mx-auto px-6 py-4">
+        <div class="flex justify-between items-center max-w-6xl mx-auto px-6 py-4" style="position: relative;">
             <div class="flex items-center gap-2 text-2xl font-bold gradient-text">
                 <i class="fas fa-dumbbell"></i>
                 <span>Alexandra Fitness</span>
             </div>
             
-            <div class="hamburger" id="hamburger">
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu" type="button">
                 <span></span>
                 <span></span>
                 <span></span>
-            </div>
+            </button>
             
             <div class="nav-menu" id="navMenu">
                 <a href="#services">Services</a>
@@ -1620,18 +1628,20 @@
         const hamburger = document.getElementById('hamburger');
         const navMenu = document.getElementById('navMenu');
         
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navMenu.classList.toggle('active');
-        });
-        
-        // Close mobile menu when clicking on links (but not dropdown buttons)
-        document.querySelectorAll('.nav-menu > a').forEach(link => {
-            link.addEventListener('click', () => {
-                hamburger.classList.remove('active');
-                navMenu.classList.remove('active');
+        if (hamburger && navMenu) {
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
             });
-        });
+            
+            // Close mobile menu when clicking on links (but not dropdown buttons)
+            document.querySelectorAll('.nav-menu > a').forEach(link => {
+                link.addEventListener('click', () => {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                });
+            });
+        }
         
         // Mobile dropdown toggle functionality
         const dropdownBtn = document.querySelector('.dropdown-btn');
