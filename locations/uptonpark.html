@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Premium personal training in Upton Park E13. Expert coaching, nutrition plans, transformation programs. Free consultation. Serving Upton Park, East Ham, Plaistow.">
+    <meta name="keywords" content="personal trainer Upton Park, PT E13, Upton Park fitness, Green Street PT, female PT E13">
+    <meta name="author" content="Alexandra Fitness">
+    <meta name="theme-color" content="#FF6B6B">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://alexandrafitness.com/locations/uptonpark.html">
+    <meta name="geo.position" content="51.5386;0.0442">
+    <meta name="geo.placename" content="Upton Park">
+    <meta name="geo.region" content="GB-LDN">
+    <meta property="og:title" content="Personal Trainer Upton Park | Alexandra Popa Fitness | E13">
+    <meta property="og:description" content="Premium personal training in Upton Park E13. Expert coaching, nutrition plans, transformation programs. Free consultation. Serving Upton Park, East Ham, Plaistow.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://alexandrafitness.com/locations/uptonpark.html">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1518611505868-d2b4fd09b592?w=1200&h=630&fit=crop">
+    <meta property="og:locale" content="en_GB">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Personal Trainer Upton Park | Alexandra Popa Fitness | E13">
+    <meta name="twitter:description" content="Premium personal training in Upton Park E13. Expert coaching, nutrition plans, transformation programs.">
+    <title>Personal Trainer Upton Park | Alexandra Popa Fitness | E13</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --color-primary: #FF6B6B; --color-primary-dark: #E55555; --color-secondary: #4ECDC4; --color-accent: #FFE66D; --bg-primary: #0F172A; --bg-secondary: #1E293B; --bg-tertiary: #334155; --text-primary: #F8FAFC; --text-secondary: #CBD5E1; --text-tertiary: #94A3B8; --border-color: rgba(255, 255, 255, 0.1); --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3); --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4); --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5); --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px; --font-heading: 'Poppins', sans-serif; --font-body: 'Inter', sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font-body); background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%); color: var(--text-primary); line-height: 1.6; min-height: 100vh; }
+        h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); font-weight: 700; line-height: 1.2; }
+        h1 { font-size: 3rem; font-weight: 800; letter-spacing: -0.02em; }
+        h2 { font-size: 2.5rem; font-weight: 800; }
+        h3 { font-size: 1.5rem; font-weight: 700; }
+        .glass-card { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid var(--border-color); border-radius: var(--radius-md); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .glass-card:hover { background: rgba(255, 255, 255, 0.08); transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+        .gradient-text { background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .navbar { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-color); position: sticky; top: 0; z-index: 1000; transition: all 0.3s ease; }
+        .nav-menu { display: none; position: absolute; top: 70px; left: 0; right: 0; background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(10px); flex-direction: column; padding: 20px; border-bottom: 1px solid var(--border-color); }
+        .nav-menu.active { display: flex; }
+        .nav-menu a { padding: 12px 0; color: var(--text-secondary); text-decoration: none; border-bottom: 1px solid var(--border-color); font-weight: 500; transition: color 0.2s ease; }
+        .nav-menu a:hover { color: var(--color-primary); }
+        .nav-menu a:last-child { border-bottom: none; }
+        .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; }
+        .hamburger span { width: 25px; height: 3px; background: var(--text-primary); border-radius: 2px; transition: all 0.3s ease; }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(8px, 8px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
+        @media (min-width: 768px) { .nav-menu { display: flex !important; position: static; flex-direction: row; gap: 30px; padding: 0; top: auto; background: transparent; border: none; } .nav-menu a { border: none; padding: 0; } .hamburger { display: none !important; } }
+        .hero { background: linear-gradient(135deg, rgba(15, 23, 42, 0.85) 0%, rgba(30, 41, 59, 0.85) 100%), url('https://images.unsplash.com/photo-1518611505868-d2b4fd09b592?w=1200&h=800&fit=crop'); background-size: cover; background-position: center; background-attachment: fixed; color: white; padding: 120px 20px; text-align: center; min-height: 500px; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; overflow: hidden; }
+        .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at 50% 50%, rgba(255, 107, 107, 0.1) 0%, transparent 50%); pointer-events: none; }
+        .hero h1 { margin-bottom: 20px; position: relative; z-index: 1; }
+        .hero p { font-size: 1.3rem; margin-bottom: 40px; opacity: 0.9; position: relative; z-index: 1; }
+        @media (max-width: 640px) { .hero { padding: 80px 20px; min-height: 400px; } .hero h1 { font-size: 2rem; } .hero p { font-size: 1.1rem; } }
+        .section { padding: 100px 20px; max-width: 1200px; margin: 0 auto; }
+        .btn-primary { background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%); color: white; padding: 14px 32px; border-radius: var(--radius-sm); font-weight: 600; border: none; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3); font-family: var(--font-body); display: inline-flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none; font-size: 1rem; }
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 6px 25px rgba(255, 107, 107, 0.5); }
+        .location-content { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 40px; margin-bottom: 40px; }
+        .location-content h2 { font-size: 2rem; margin-bottom: 20px; color: var(--text-primary); }
+        .location-content p { margin-bottom: 20px; color: var(--text-secondary); line-height: 1.8; }
+        .map-container { margin-top: 40px; border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-lg); height: 400px; border: 1px solid var(--border-color); }
+        .map-container iframe { width: 100%; height: 100%; border: none; }
+        .service-areas { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+        .area-badge { background: rgba(78, 205, 196, 0.1); color: var(--color-secondary); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; font-weight: 600; }
+        .footer { background: var(--bg-primary); border-top: 1px solid var(--border-color); color: var(--text-primary); padding: 60px 20px 30px; margin-top: 80px; }
+        .footer-content { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; margin-bottom: 40px; }
+        .footer-section h4 { margin-bottom: 20px; font-size: 1.2rem; font-family: var(--font-heading); color: var(--text-primary); }
+        .footer-section a { display: block; color: var(--text-secondary); text-decoration: none; margin-bottom: 12px; transition: color 0.3s ease; }
+        .footer-section a:hover { color: var(--color-primary); }
+        .social-icons { display: flex; gap: 15px; margin-top: 15px; }
+        .social-icons a { display: inline-flex; width: 45px; height: 45px; align-items: center; justify-content: center; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); border-radius: 50%; margin: 0; transition: all 0.3s ease; }
+        .social-icons a:hover { background: var(--color-primary); color: white; border-color: var(--color-primary); transform: translateY(-3px); }
+        .footer-bottom { border-top: 1px solid var(--border-color); padding-top: 30px; text-align: center; color: var(--text-tertiary); font-size: 0.9rem; }
+        #whatsapp-modal { display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(5px); z-index: 9998; }
+        #whatsapp-modal.active { display: flex; align-items: center; justify-content: center; }
+        .whatsapp-modal-content { background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: var(--radius-md); max-width: 500px; width: 90%; max-height: 85vh; overflow-y: auto; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5); }
+        #whatsapp-trigger { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, #25D366 0%, #20BA5A 100%); color: white; border: none; cursor: pointer; box-shadow: 0 4px 20px rgba(37, 211, 102, 0.5); display: flex; align-items: center; justify-content: center; font-size: 28px; transition: all 0.3s ease; z-index: 9997; }
+        #whatsapp-trigger:hover { transform: scale(1.1); box-shadow: 0 6px 30px rgba(37, 211, 102, 0.7); }
+        @media (max-width: 768px) { .section { padding: 60px 20px; } h1 { font-size: 2rem; } h2 { font-size: 1.8rem; } .location-content { padding: 24px; } }
+    </style>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org/","@type":"LocalBusiness","name":"Alexandra Popa Fitness","image":"https://images.unsplash.com/photo-1518611505868-d2b4fd09b592?w=400&h=300&fit=crop","description":"Expert female personal trainer in Upton Park. 1:1 PT, online coaching, nutrition plans.","address":{"@type":"PostalAddress","addressLocality":"Upton Park","addressRegion":"London","addressCountry":"GB"},"geo":{"@type":"GeoCoordinates","latitude":51.5386,"longitude":0.0442},"telephone":"+447940053102","priceRange":"£199-£499","areaServed":["Upton Park","East Ham","Plaistow","Forest Gate"],"sameAs":["https://www.instagram.com/alexandraapopaa/","https://www.puregym.com/gyms/london-stratford/personal-trainers/alexandra-popa/"],"serviceType":["Personal Training","Online Coaching","Nutrition Planning"]}
+    </script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="flex justify-between items-center max-w-6xl mx-auto px-6 py-4">
+            <div class="flex items-center gap-2 text-2xl font-bold gradient-text"><i class="fas fa-dumbbell"></i><span>Alexandra Fitness</span></div>
+            <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+            <div class="nav-menu" id="navMenu">
+                <a href="../index.html">Home</a>
+                <a href="../index.html#services">Services</a>
+                <a href="../index.html#tools">Tools</a>
+                <a href="../index.html#exercises">Exercises</a>
+                <a href="../index.html#pricing">Pricing</a>
+                <a href="../index.html#about">About</a>
+                <a href="../index.html#contact">Contact</a>
+            </div>
+        </div>
+    </nav>
+    <section class="hero">
+        <div><h1 class="gradient-text">Personal Trainer Upton Park | E13 PT</h1><p>Expert Female Personal Training in East London E13</p></div>
+    </section>
+    <section class="section">
+        <div class="location-content">
+            <h2 class="gradient-text">Personal Training in Upton Park</h2>
+            <p>Welcome to Alexandra Popa Fitness – your premier destination for expert personal training in Upton Park, East London. Serving the vibrant communities of E13 and surrounding areas including the famous Green Street, I specialize in helping women achieve their fitness goals through personalized 1:1 coaching, comprehensive nutrition planning, and sustainable lifestyle transformations.</p>
+            <p>Upton Park is a historic area in East London with a rich sporting heritage and excellent community facilities. Whether you're based near the former Boleyn Ground, along Green Street, or in the residential areas of Plaistow and East Ham, my personal training services are designed to fit your lifestyle. I offer flexible session locations including local gyms, outdoor parks, and home visits for maximum convenience.</p>
+            <p>As a certified female personal trainer with over 5 years of experience, I understand the unique challenges women face when it comes to fitness. My approach combines evidence-based training methods with compassionate support, ensuring you feel confident and empowered throughout your transformation journey from beginner to advanced athlete.</p>
+            <p>Upton Park's excellent connectivity via the District and Hammersmith & City lines, plus the Elizabeth Line at nearby Custom House, makes it easy to access training sessions from across East London and beyond. Whether you're looking for 1:1 personal training, online coaching, or group sessions, I'm here to guide you every step of the way.</p>
+            <h3 style="margin-top: 40px; margin-bottom: 20px; color: var(--text-primary);">Why Choose Personal Training in Upton Park?</h3>
+            <p>Upton Park offers a diverse fitness landscape with beautiful green spaces like Plashet Park perfect for outdoor training, modern gym facilities, and a supportive community of health-conscious individuals. My Upton Park-based personal training services include comprehensive fitness assessments, customized workout programs, nutritional guidance, and ongoing support to keep you motivated and accountable.</p>
+            <p>Training in Upton Park means you'll have access to excellent facilities and the flexibility to train wherever suits you best. The area's strong community spirit and growing fitness culture make it an ideal location for your transformation journey. I believe in building lasting relationships with my clients, celebrating every milestone, and adapting your program as you progress towards your goals.</p>
+            <div class="service-areas"><span class="area-badge">📍 Upton Park E13</span><span class="area-badge">📍 East Ham</span><span class="area-badge">📍 Plaistow</span><span class="area-badge">📍 Forest Gate</span><span class="area-badge">📍 Green Street</span></div>
+            <div class="map-container"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2480!2d0.0442!3d51.5386!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47d8a4f5e8c0a123%3A0x8b5c5d5e5f5g5h5i!2sUpton%20Park%20E13!5e0!3m2!1sen!2suk!4v1234567890" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+            <div style="text-align: center; margin-top: 40px;"><button class="btn-primary" onclick="openWhatsAppModal()"><i class="fab fa-whatsapp"></i> Book at Upton Park</button></div>
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section"><h4 class="gradient-text">Alexandra Fitness</h4><p style="color: var(--text-secondary);">Expert personal training in Stratford, Ilford & East London.</p><div class="social-icons"><a href="https://www.instagram.com/alexandraapopaa/" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a><a href="https://www.puregym.com/gyms/london-stratford/personal-trainers/alexandra-popa/" target="_blank" title="Pure Gym"><i class="fas fa-dumbbell"></i></a><a href="https://wa.me/447940053102" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a></div></div>
+            <div class="footer-section"><h4>Quick Links</h4><a href="../index.html">Home</a><a href="../index.html#services">Services</a><a href="../index.html#tools">Tools</a><a href="../index.html#pricing">Pricing</a><a href="../index.html#about">About</a><a href="../index.html#contact">Contact</a></div>
+            <div class="footer-section"><h4>Services</h4><a href="../index.html#services">Personal Training</a><a href="../index.html#services">Online Coaching</a><a href="../index.html#services">Nutrition Planning</a><a href="../index.html#services">Meal Plans</a></div>
+            <div class="footer-section"><h4>Contact</h4><a href="tel:+447940053102">+44 7940 053102</a><a href="https://wa.me/447940053102" target="_blank">WhatsApp</a><p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 10px;">Upton Park, London E13</p></div>
+        </div>
+        <div class="footer-bottom"><p>© 2026 Alexandra Fitness. All rights reserved. | <a href="#" style="color: var(--text-tertiary);">Privacy Policy</a> | <a href="#" style="color: var(--text-tertiary);">Terms & Conditions</a></p><p style="margin-top: 10px;">Design Concept by SAL Digital - <a href="https://syedlatief.com" style="color: var(--text-tertiary);" target="_blank">syedlatief.com</a></p></div>
+    </footer>
+    <div id="whatsapp-modal">
+        <div class="whatsapp-modal-content p-8">
+            <div class="flex justify-between items-center mb-6" style="padding: 24px; border-bottom: 1px solid var(--border-color);"><h3 class="text-2xl font-bold gradient-text">Let's Get You Started</h3><button id="whatsapp-close" class="text-2xl leading-none" style="background: none; border: none; cursor: pointer; padding: 0; color: var(--text-primary);">&times;</button></div>
+            <form id="whatsapp-form" class="space-y-6" style="padding: 24px;">
+                <div><label class="block font-semibold mb-3" style="color: var(--text-primary);">What's Your Fitness Goal?</label><div class="space-y-2"><label class="flex items-center" style="cursor: pointer; color: var(--text-secondary);"><input type="radio" name="goal" value="Weight Loss" class="mr-3" required><span>Weight Loss</span></label><label class="flex items-center" style="cursor: pointer; color: var(--text-secondary);"><input type="radio" name="goal" value="Muscle Gain" class="mr-3"><span>Muscle Gain</span></label><label class="flex items-center" style="cursor: pointer; color: var(--text-secondary);"><input type="radio" name="goal" value="General Fitness" class="mr-3"><span>General Fitness</span></label><label class="flex items-center" style="cursor: pointer; color: var(--text-secondary);"><input type="radio" name="goal" value="Athletic Performance" class="mr-3"><span>Athletic Performance</span></label></div></div>
+                <div><label class="block font-semibold mb-3" style="color: var(--text-primary);">What's Your Fitness Level?</label><div class="space-y-2"><label class="flex items-center" style="cursor: pointer; color: var(--text-secondary);"><input type="radio" name="level" value="Beginner" class="mr-3" required><span>Beginner</span></label><label class="flex items-center" style="cursor: pointer; color: var(--text-secondary);"><input type="radio" name="level" value="Intermediate" class="mr-3"><span>Intermediate</span></label><label class="flex items-center" style="cursor: pointer; color: var(--text-secondary);"><input type="radio" name="level" value="Advanced" class="mr-3"><span>Advanced</span></label></div></div>
+                <div><label class="block font-semibold mb-3" style="color: var(--text-primary);">Where Are You Located?</label><select name="location" class="w-full p-3 rounded-lg" style="background: rgba(255,255,255,0.05); color: var(--text-primary); border: 1px solid var(--border-color);" required><option value="">Select location...</option><option value="Stratford">Stratford</option><option value="Forest Gate">Forest Gate</option><option value="Upton Park" selected>Upton Park</option><option value="Leyton">Leyton</option><option value="Ilford">Ilford</option><option value="Online">Online</option><option value="Other">Other</option></select></div>
+                <div><label class="block font-semibold mb-3" style="color: var(--text-primary);">When Can You Start?</label><div class="space-y-2"><label class="flex items-center" style="cursor: pointer; color: var(--text-secondary);"><input type="radio" name="timeline" value="Immediately" class="mr-3" required><span>Immediately</span></label><label class="flex items-center" style="cursor: pointer; color: var(--text-secondary);"><input type="radio" name="timeline" value="This Week" class="mr-3"><span>This Week</span></label><label class="flex items-center" style="cursor: pointer; color: var(--text-secondary);"><input type="radio" name="timeline" value="Next Month" class="mr-3"><span>Next Month</span></label></div></div>
+                <button type="submit" class="btn-primary w-full justify-center" style="width: 100%;">Send to WhatsApp</button>
+            </form>
+        </div>
+    </div>
+    <button id="whatsapp-trigger" title="Chat with us on WhatsApp">💬</button>
+    <script>
+        const whatsappTrigger = document.getElementById('whatsapp-trigger');
+        const whatsappModal = document.getElementById('whatsapp-modal');
+        const whatsappClose = document.getElementById('whatsapp-close');
+        const whatsappForm = document.getElementById('whatsapp-form');
+        function openWhatsAppModal() { whatsappModal.classList.add('active'); }
+        whatsappTrigger.addEventListener('click', openWhatsAppModal);
+        const closeModal = () => { whatsappModal.classList.remove('active'); };
+        whatsappClose.addEventListener('click', closeModal);
+        whatsappModal.addEventListener('click', (e) => { if (e.target === whatsappModal) { closeModal(); } });
+        whatsappForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const goal = document.querySelector('input[name="goal"]:checked')?.value || '';
+            const level = document.querySelector('input[name="level"]:checked')?.value || '';
+            const location = document.querySelector('select[name="location"]').value || '';
+            const timeline = document.querySelector('input[name="timeline"]:checked')?.value || '';
+            const message = `Hi! I'm interested in starting my fitness journey with Alexandra.\n\nGoal: ${goal}\nFitness Level: ${level}\nLocation: ${location}\nTimeline: ${timeline}\n\nLooking forward to hearing from you!`;
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappURL = `https://wa.me/447940053102?text=${encodedMessage}`;
+            window.open(whatsappURL, '_blank');
+            closeModal();
+            whatsappForm.reset();
+        });
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && whatsappModal.classList.contains('active')) { closeModal(); } });
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        hamburger.addEventListener('click', () => { hamburger.classList.toggle('active'); navMenu.classList.toggle('active'); });
+        document.querySelectorAll('.nav-menu a').forEach(link => { link.addEventListener('click', () => { hamburger.classList.remove('active'); navMenu.classList.remove('active'); }); });
+    </script>
+</body>
+</html>
