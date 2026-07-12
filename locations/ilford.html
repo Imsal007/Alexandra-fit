@@ -55,11 +55,12 @@
         .nav-menu a { padding: 12px 0; color: var(--text-secondary); text-decoration: none; border-bottom: 1px solid var(--border-color); font-weight: 500; transition: color 0.2s ease; }
         .nav-menu a:hover { color: var(--color-primary); }
         .nav-menu a:last-child { border-bottom: none; }
-        .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; }
+        .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; padding: 5px; }
         .hamburger span { width: 25px; height: 3px; background: var(--text-primary); border-radius: 2px; transition: all 0.3s ease; }
         .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(8px, 8px); }
         .hamburger.active span:nth-child(2) { opacity: 0; }
         .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
+        @media (max-width: 767px) { .hamburger { display: flex !important; } }
         @media (min-width: 768px) { .nav-menu { display: flex !important; position: static; flex-direction: row; gap: 30px; padding: 0; top: auto; background: transparent; border: none; } .nav-menu a { border: none; padding: 0; } .hamburger { display: none !important; } }
         .hero { background: linear-gradient(135deg, rgba(15, 23, 42, 0.85) 0%, rgba(30, 41, 59, 0.85) 100%), url('https://images.unsplash.com/photo-1518611505868-d2b4fd09b592?w=1200&h=800&fit=crop'); background-size: cover; background-position: center; background-attachment: fixed; color: white; padding: 120px 20px; text-align: center; min-height: 500px; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; overflow: hidden; }
         .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at 50% 50%, rgba(255, 107, 107, 0.1) 0%, transparent 50%); pointer-events: none; }
@@ -124,16 +125,16 @@
 </head>
 <body>
     <nav class="navbar">
-        <div class="flex justify-between items-center max-w-6xl mx-auto px-6 py-4">
+        <div class="flex justify-between items-center max-w-6xl mx-auto px-6 py-4" style="position: relative;">
             <div class="flex items-center gap-2 text-2xl font-bold gradient-text">
                 <i class="fas fa-dumbbell"></i>
                 <span>Alexandra Fitness</span>
             </div>
-            <div class="hamburger" id="hamburger">
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu" type="button">
                 <span></span>
                 <span></span>
                 <span></span>
-            </div>
+            </button>
             <div class="nav-menu" id="navMenu">
                 <a href="../index.html">Home</a>
                 <a href="../index.html#services">Services</a>
@@ -319,8 +320,10 @@
 
         const hamburger = document.getElementById('hamburger');
         const navMenu = document.getElementById('navMenu');
-        hamburger.addEventListener('click', () => { hamburger.classList.toggle('active'); navMenu.classList.toggle('active'); });
-        document.querySelectorAll('.nav-menu a').forEach(link => { link.addEventListener('click', () => { hamburger.classList.remove('active'); navMenu.classList.remove('active'); }); });
+        if (hamburger && navMenu) {
+            hamburger.addEventListener('click', () => { hamburger.classList.toggle('active'); navMenu.classList.toggle('active'); });
+            document.querySelectorAll('.nav-menu a').forEach(link => { link.addEventListener('click', () => { hamburger.classList.remove('active'); navMenu.classList.remove('active'); }); });
+        }
     </script>
 </body>
 </html>
